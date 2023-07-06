@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Box } from "@mui/material";
-import { Navbar, MovieDetail, ShowDetail, Feed, SearchFeed, Genre } from './components';
+import { Navbar, Movies, MovieDetail, Shows, ShowDetail, Feed, SearchFeed, Genre } from './components';
 
 const App = () => {
   return (
@@ -9,7 +9,9 @@ const App = () => {
         <Navbar />
         <Routes>
             <Route path="/" exact element={ <Feed /> } />
+            <Route path="/movies" element={ <Movies /> } />
             <Route path="/movies/:id" element={ <MovieDetail /> } />
+            <Route path="/shows" element={ <Shows /> } />
             <Route path="/shows/:id" element={ <ShowDetail /> } />
             <Route path="/search/:searchTerm" element={ <SearchFeed /> } />
             <Route path="/genre/:genreTerm" element={ <Genre /> } />

@@ -1,6 +1,9 @@
 export { default as Navbar } from './Navbar';
 export { default as Feed } from './Feed';
+export { default as Movies } from './Movies';
+export { default as Shows } from './Shows';
 export { default as SearchFeed } from './SearchFeed';
+export { default as SearchBar } from './SearchBar';
 export { default as MovieDetail } from './MovieDetail';
 export { default as ShowDetail } from './ShowDetail';
 export { default as Genre } from './Genre';
