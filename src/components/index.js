@@ -3,3 +3,4 @@ export { default as Feed } from './Feed';
 export { default as SearchFeed } from './SearchFeed';
 export { default as MovieDetail } from './MovieDetail';
 export { default as ShowDetail } from './ShowDetail';
+export { default as Genre } from './Genre';
