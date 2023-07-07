@@ -1,9 +1,18 @@
+import { Search } from '@mui/icons-material'
+import { IconButton } from '@mui/material'
 import React from 'react'
 
 const SearchBar = () => {
-  return (
-    <div>SearchBar</div>
-  )
+    return (
+        <IconButton 
+            type="submit" 
+            sx={{ color: '#FFFFFF' }}
+        >
+            <Search 
+                fontSize="large" 
+            />
+        </IconButton>
+    )
 }
 
 export default SearchBar
