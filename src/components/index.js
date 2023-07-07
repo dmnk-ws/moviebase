@@ -7,3 +7,4 @@ export { default as SearchBar } from './SearchBar';
 export { default as MovieDetail } from './MovieDetail';
 export { default as ShowDetail } from './ShowDetail';
 export { default as Genre } from './Genre';
+export { default as SearchButton } from './SearchButton';

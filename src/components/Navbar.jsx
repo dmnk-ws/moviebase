@@ -1,13 +1,21 @@
 import { Stack, Box, Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ExpandMore } from '@mui/icons-material';
+import { useState } from "react";
 
 
 import logo from '../assets/images/logo.png';
 import profile from '../assets/images/profile.png';
-import { SearchBar, Movies, Shows } from "./";
+import { SearchBar, SearchButton, Movies, Shows } from "./";
 
-const Navbar = () => (
+const Navbar = () => {
+    const [isActive, setIsActive] = useState(false);
+
+    const updateActive = (active) => {
+        setIsActive(active);
+    }
+
+    return (
         <Stack
             direction="row" 
             sx={{ position: 'sticky', background: '#000000', top: 0, padding: '20px 50px 20px', alignItems: 'middle' }}
@@ -48,16 +56,22 @@ const Navbar = () => (
             <Box
                 sx={{ display:'inline-flex', alignItems: 'center', position: 'absolute', right: '50px' }}
             >
-                <SearchBar />
-                <Avatar 
-                    src={profile}
-                    sx={{ marginLeft: '10px' }}
-                />
-                <ExpandMore
-                    sx={{ color: '#FFFFFF' }}
-                />
+                { isActive ? <SearchBar padding="10px" updateActive={updateActive} /> : <SearchButton color="#FFFFFF" updateActive={updateActive} active={true} /> }
+                <Stack
+                    direction="row"
+                    sx={{ alignItems: "center", cursor: 'pointer' }}
+                >
+                    <Avatar 
+                        src={profile}
+                        sx={{ marginLeft: '10px' }}
+                    />
+                    <ExpandMore
+                        sx={{ color: '#FFFFFF' }}
+                    />
+                </Stack>
             </Box>
         </Stack>
-);
+    )
+};
 
 export default Navbar

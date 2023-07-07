@@ -1,17 +1,23 @@
-import { Search } from '@mui/icons-material'
-import { IconButton } from '@mui/material'
-import React from 'react'
+import { Paper } from '@mui/material';
+import { SearchButton } from './';
 
-const SearchBar = () => {
+import '../index.css';
+
+const SearchBar = ({updateActive}) => {
     return (
-        <IconButton 
-            type="submit" 
-            sx={{ color: '#FFFFFF' }}
+        <Paper
+            component="form"
+            onSubmit={() => {}}
+            sx={{ borderRadius: 20, border: '1px solid #E3E3E3', pl: 2, boxShadow: 'none' }}
         >
-            <Search 
-                fontSize="large" 
+            <input
+                className="search-bar"
+                placeholder="Search..." 
+                value="" 
+                onChange={() => {}}
             />
-        </IconButton>
+            <SearchButton color="#000000" updateActive={updateActive} active={false} />
+        </Paper>
     )
 }
 

@@ -1,3 +1,15 @@
 body {
     font-family: Roboto;
-  }
+}
+
+.search-bar {
+    border: none;
+    outline: none;
+    width: 200px;
+}
+
+@media screen and (min-width: 900px) {
+    .search-bar {
+        width: 350px;
+    }
+}
