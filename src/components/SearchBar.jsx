@@ -8,15 +8,17 @@ const SearchBar = ({updateActive}) => {
         <Paper
             component="form"
             onSubmit={() => {}}
-            sx={{ borderRadius: 20, border: '1px solid #E3E3E3', pl: 2, boxShadow: 'none' }}
+            sx={{ display: 'flex', border: '1px solid #FFFFFF', boxShadow: 'none', background: "#000000", alignItems: 'center' }}
         >
+            <SearchButton updateActive={updateActive} active={false} />
             <input
+                autoFocus
                 className="search-bar"
-                placeholder="Search..." 
-                value="" 
+                placeholder="Search..."
+                value=""
                 onChange={() => {}}
             />
-            <SearchButton color="#000000" updateActive={updateActive} active={false} />
+            <i></i>
         </Paper>
     )
 }

@@ -1,7 +1,7 @@
 import { Search } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 
-const SearchButton = ({color, updateActive, active}) => {
+const SearchButton = ({updateActive, active}) => {
 
     const handleClick = () => {
         updateActive(active);
@@ -11,7 +11,7 @@ const SearchButton = ({color, updateActive, active}) => {
         <IconButton 
             type="submit"
             onClick={handleClick}
-            sx={{ color: color }}
+            sx={{ color: '#FFFFFF', padding: 0, '&:hover': { background: '#333333' } }}
         >
             <Search 
                 fontSize="large" 
