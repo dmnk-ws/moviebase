@@ -68,6 +68,11 @@ const Navbar = () => {
             >
                 { isActive ? <SearchBar padding="10px" updateActive={updateActive} /> : <SearchButton updateActive={updateActive} active={true} /> }
                 <Stack
+                    ref={ popoverAnchor }
+                    aria-owns="mouse-over-popover"
+                    aria-haspopup="true"
+                    onMouseEnter={ handlePopoverOpen }
+                    onMouseLeave={ handlePopoverClose }
                     direction="row"
                     sx={{ alignItems: "center", cursor: 'pointer' }}
                 >
@@ -76,12 +81,8 @@ const Navbar = () => {
                         sx={{ marginLeft: '10px' }}
                     />
                     <ExpandMore
-                        ref={ popoverAnchor }
-                        aria-owns="mouse-over-popover"
-                        aria-haspopup="true"
-                        sx={{ color: '#FFFFFF', '&:hover': { transform: 'rotate(180deg)', transition: 'transform 100ms ease-in' } }}
-                        onMouseEnter={ handlePopoverOpen }
-                        onMouseLeave={ handlePopoverClose }
+                        className={ hasPopover ? "nav-arrow" : undefined }
+                        sx={{ color: '#FFFFFF', transition: 'transform 200ms ease' }}
                     />
                     <Popover
                         id="mouse-over-popover"
