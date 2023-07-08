@@ -12,7 +12,6 @@ const SearchBar = ({updateActive}) => {
         >
             <SearchButton updateActive={updateActive} active={false} />
             <input
-                autoFocus
                 className="search-bar"
                 placeholder="Search..."
                 value=""

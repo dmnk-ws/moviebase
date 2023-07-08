@@ -9,3 +9,4 @@ export { default as ShowDetail } from './ShowDetail';
 export { default as Genre } from './Genre';
 export { default as SearchButton } from './SearchButton';
 export { default as NavbarPopUp } from './NavbarPopUp';
+export { default as NavbarMenu} from './NavbarMenu';

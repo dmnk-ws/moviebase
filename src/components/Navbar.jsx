@@ -1,12 +1,13 @@
 import { Stack, Box, Avatar, Popover } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ExpandMore } from '@mui/icons-material';
+import MenuIcon from '@mui/icons-material/Menu';
 import { useState, useRef } from "react";
 
 
 import logo from '../assets/images/logo.png';
 import profile from '../assets/images/profile.png';
-import { SearchBar, SearchButton, Movies, Shows, NavbarPopUp } from "./";
+import { SearchBar, SearchButton, NavbarPopUp, NavbarMenu } from "./";
 
 const Navbar = () => {
     const [isActive, setIsActive] = useState(false);
@@ -28,43 +29,26 @@ const Navbar = () => {
     return (
         <Stack
             direction="row" 
-            sx={{ position: 'sticky', background: '#000000', top: 0, padding: '20px 50px 20px', alignItems: 'center' }}
+            sx={{ position: 'sticky', background: '#000000', top: 0, padding: { xs: '20px 25px 20px', sm: '20px 50px 20px' }, alignItems: 'center' }}
         >
-            <Box
-                sx={{ display: 'inline-flex', justifyContent: 'flex-start' }}
+            <MenuIcon
+                sx={{ color:"#FFFFFF", display: { sm: 'flex', md: 'none' }, fontSize: 'xx-large', marginRight: '10px' }} 
+            />
+            <Link 
+                to="/" 
+                style={{ display: 'flex', alignItems: 'center' }}
             >
-
-                <Link 
-                    to="/" 
-                    style={{ display: 'flex', alignItems: 'center' }}
-                >
-                    <img 
-                        src={ logo } 
-                        alt="logo" 
-                        height={ 45 }
-                    />
-                </Link>
-                <Link
-                    to="/"
-                    style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: '#FFFFFF', marginLeft: '30px' }}
-                >
-                    Start
-                </Link>
-                <Link
-                    to="/movies"
-                    style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: '#FFFFFF', marginLeft: '30px' }}
-                >
-                    <Movies />
-                </Link>
-                <Link
-                    to="/shows"
-                    style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: '#FFFFFF', marginLeft: '30px' }}
-                >
-                    <Shows />
-                </Link>
+                <img 
+                    src={ logo } 
+                    alt="logo" 
+                    className="logo"
+                />
+            </Link>
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }} >
+                <NavbarMenu />
             </Box>
             <Box
-                sx={{ display:'inline-flex', alignItems: 'center', position: 'absolute', right: '50px' }}
+                sx={{ display:'inline-flex', alignItems: 'center', position: 'absolute', right: { xs: '25px', sm: '50px' } }}
             >
                 { isActive ? <SearchBar padding="10px" updateActive={updateActive} /> : <SearchButton updateActive={updateActive} active={true} /> }
                 <Stack
@@ -74,7 +58,7 @@ const Navbar = () => {
                     onMouseEnter={ handlePopoverOpen }
                     onMouseLeave={ handlePopoverClose }
                     direction="row"
-                    sx={{ alignItems: "center", cursor: 'pointer' }}
+                    sx={{ display: { xs: 'none', md: 'flex' }, alignItems: "center", cursor: 'pointer', marginLeft: '10px' }}
                 >
                     <Avatar 
                         src={ profile }
