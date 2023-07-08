@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { ExpandMore } from '@mui/icons-material';
 import { useState, useRef } from "react";
 
+
 import logo from '../assets/images/logo.png';
 import profile from '../assets/images/profile.png';
-import { SearchBar, SearchButton, Movies, Shows } from "./";
+import { SearchBar, SearchButton, Movies, Shows, NavbarPopUp } from "./";
 
 const Navbar = () => {
     const [isActive, setIsActive] = useState(false);
@@ -27,7 +28,7 @@ const Navbar = () => {
     return (
         <Stack
             direction="row" 
-            sx={{ position: 'sticky', background: '#000000', top: 0, padding: '20px 50px 20px', alignItems: 'middle' }}
+            sx={{ position: 'sticky', background: '#000000', top: 0, padding: '20px 50px 20px', alignItems: 'center' }}
         >
             <Box
                 sx={{ display: 'inline-flex', justifyContent: 'flex-start' }}
@@ -91,11 +92,7 @@ const Navbar = () => {
                         transformOrigin={{ vertical: 'top', horizontal: 'left' }}
                         slotProps={{ paper: { onMouseEnter: handlePopoverOpen, onMouseLeave: handlePopoverClose, sx: { pointerEvents: 'auto' } } }}
                     >
-                        <Stack>
-                            <Link>Mein Profil</Link>
-                            <Link>Einstellungen</Link>
-                            <Link>Abmelden</Link>
-                        </Stack>
+                        <NavbarPopUp />
                     </Popover>
                 </Stack>
             </Box>

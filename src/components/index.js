@@ -8,3 +8,4 @@ export { default as MovieDetail } from './MovieDetail';
 export { default as ShowDetail } from './ShowDetail';
 export { default as Genre } from './Genre';
 export { default as SearchButton } from './SearchButton';
+export { default as NavbarPopUp } from './NavbarPopUp';
