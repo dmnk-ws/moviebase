@@ -1,31 +1,32 @@
 import { Link } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Typography, MenuList, MenuItem } from '@mui/material';
 
-import { Movies, Shows } from './';
+import '../index.css';
+import { navList } from '../utils/constants';
 
 const NavbarMenu = () => (
-    <Box
-        sx={{ display: { sm: 'flex', md: 'inline-flex' }, justifyContent: 'flex-start' }}
+    <MenuList
+        sx={{ display: { xs: 'flex', md: 'inline-flex' }, border: { xs: '1px solid #FFFFFF', md: 'none' }, justifyContent: 'flex-start', background: '#000000', flexDirection: { xs: 'column', md: 'row' } }}
     >
-        <Link
-            to="/"
-            style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: '#FFFFFF', marginLeft: '30px' }}
-        >
-            Start
-        </Link>
-        <Link
-            to="/movies"
-            style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: '#FFFFFF', marginLeft: '30px' }}
-        >
-            <Movies />
-        </Link>
-        <Link
-            to="/shows"
-            style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: '#FFFFFF', marginLeft: '30px' }}
-        >
-            <Shows />
-        </Link>
-    </Box>
+        {navList.map((nav, index) => (
+            <MenuItem
+                sx={{ marginLeft: {xs: 0, md: '20px'} }}
+            >
+                <Link
+                    key={nav + index}
+                    className="nav-link"
+                    to="/shows"
+                    style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
+                >
+                    <Typography
+                        sx={{ color: '#FFFFFF', '&:hover': { color: '#D3D3D3' } }}
+                    >
+                        {nav}
+                    </Typography>
+                </Link>
+            </MenuItem>
+        ))}
+    </MenuList>
 );
 
 export default NavbarMenu

@@ -10,6 +10,10 @@ body {
     display: none;
 }
 
+.nav-link:hover {
+    color: #333333;
+}
+
 .search-bar {
     border: none;
     outline: none;
@@ -35,6 +39,6 @@ body {
     }
 
     .search-bar {
-        width: 350px;
+        width: 250px;
     }
 }

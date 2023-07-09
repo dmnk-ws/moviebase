@@ -1,13 +1,11 @@
 import { Stack, Box, Avatar, Popover } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ExpandMore } from '@mui/icons-material';
-import MenuIcon from '@mui/icons-material/Menu';
 import { useState, useRef } from "react";
-
 
 import logo from '../assets/images/logo.png';
 import profile from '../assets/images/profile.png';
-import { SearchBar, SearchButton, NavbarPopUp, NavbarMenu } from "./";
+import { SearchBar, SearchButton, NavbarPopUp, NavbarMenu, HamburgerMenu } from "./";
 
 const Navbar = () => {
     const [isActive, setIsActive] = useState(false);
@@ -31,9 +29,9 @@ const Navbar = () => {
             direction="row" 
             sx={{ position: 'sticky', background: '#000000', top: 0, padding: { xs: '20px 25px 20px', sm: '20px 50px 20px' }, alignItems: 'center' }}
         >
-            <MenuIcon
-                sx={{ color:"#FFFFFF", display: { sm: 'flex', md: 'none' }, fontSize: 'xx-large', marginRight: '10px' }} 
-            />
+            <Box sx={{ display: { xs: 'flex', md: 'none' } }} >
+                <HamburgerMenu />
+            </Box>
             <Link 
                 to="/" 
                 style={{ display: 'flex', alignItems: 'center' }}
