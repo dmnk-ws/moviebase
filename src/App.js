@@ -5,7 +5,7 @@ import { Navbar, Movies, MovieDetail, Shows, ShowDetail, Feed, SearchFeed, Genre
 const App = () => {
   return (
     <BrowserRouter>
-    <Box sx={{ backgroundColor: '#000000', height: '100vh' }}>
+    <Box sx={{ backgroundColor: '#000000', height: '100%' }}>
         <Navbar />
         <Routes>
             <Route path="/" exact element={ <Feed /> } />

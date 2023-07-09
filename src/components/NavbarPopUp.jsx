@@ -13,7 +13,9 @@ const NavbarPopUp = () => (
                 sx={{ background: '#000000', border: '1px solid #FFFFFF' }}
             >
                 {navPopUp.map(({name, icon}) => (
-                    <MenuItem>
+                    <MenuItem
+                        key={name}
+                    >
                         <ListItemIcon>
                             {icon}
                         </ListItemIcon>

@@ -11,3 +11,5 @@ export { default as SearchButton } from './SearchButton';
 export { default as NavbarPopUp } from './NavbarPopUp';
 export { default as NavbarMenu} from './NavbarMenu';
 export { default as HamburgerMenu } from './HamburgerMenu';
+export { default as MovieCard } from './MovieCard';
+export { default as ShowCard } from './ShowCard';

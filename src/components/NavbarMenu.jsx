@@ -10,10 +10,10 @@ const NavbarMenu = () => (
     >
         {navList.map((nav, index) => (
             <MenuItem
+                key={nav + index}
                 sx={{ marginLeft: {xs: 0, md: '20px'} }}
             >
                 <Link
-                    key={nav + index}
                     className="nav-link"
                     to="/shows"
                     style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
