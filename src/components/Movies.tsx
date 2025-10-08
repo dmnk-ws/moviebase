@@ -1,14 +1,13 @@
 import { Stack } from '@mui/material';
 
-import { MovieCard } from './';
-import { Movie } from '../services/MediaClient';
+import { MovieCard } from './index';
+import { useAppSelector } from '../store/hooks';
+import { selectMovies } from '../store/movieSlice';
 
-interface MoviesProps {
-  movies: Movie[];
-}
+const Movies = () => {
+  const movies = useAppSelector((state) => selectMovies(state));
 
-const Movies = ({ movies }: MoviesProps) => {
-  if (!movies?.length) return 'Loading...';
+  if (!movies) return 'Loading...';
 
   return (
     <Stack
@@ -23,12 +22,7 @@ const Movies = ({ movies }: MoviesProps) => {
       }}
     >
       {movies.map((movie) => (
-        <MovieCard
-          key={movie.id}
-          title={movie.title}
-          description={movie.description}
-          imagePath={movie.imagePath}
-        />
+        <MovieCard key={movie.id} title={movie.title} imagePath={movie.imagePath} />
       ))}
     </Stack>
   );

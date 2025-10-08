@@ -1,14 +1,13 @@
 import { Stack } from '@mui/material';
 
 import { ShowCard } from './';
-import { Show } from '../services/MediaClient';
+import { useAppSelector } from '../store/hooks';
+import { selectShows } from '../store/showSlice';
 
-interface ShowsProps {
-  shows: Show[];
-}
+const Shows = () => {
+  const shows = useAppSelector((state) => selectShows(state));
 
-const Shows = ({ shows }: ShowsProps) => {
-  if (!shows?.length) return 'Loading...';
+  if (!shows) return 'Loading...';
 
   return (
     <Stack
@@ -23,12 +22,7 @@ const Shows = ({ shows }: ShowsProps) => {
       }}
     >
       {shows.map((show) => (
-        <ShowCard
-          key={show.id}
-          name={show.name}
-          description={show.description}
-          imagePath={show.imagePath}
-        />
+        <ShowCard key={show.id} name={show.name} imagePath={show.imagePath} />
       ))}
     </Stack>
   );

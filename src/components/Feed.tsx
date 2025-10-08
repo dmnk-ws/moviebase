@@ -1,22 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Stack, Box } from '@mui/material';
 
 import { Movies, Shows } from './';
-import TMDB from '../services/TMDB';
-import { Movie, Show } from '../services/MediaClient';
-
-const mediaService = new TMDB();
+import { useAppDispatch } from '../store/hooks';
+import { fetchPopularMovies } from '../store/movieSlice';
+import { fetchPopularShows } from '../store/showSlice';
 
 const Feed = () => {
-  //const [category, setCategory] = useState(trending)
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [shows, setShows] = useState<Show[]>([]);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    mediaService.getPopularMovies().then((movies) => setMovies(movies));
-
-    mediaService.getPopularShows().then((shows) => setShows(shows));
-  }, []);
+    dispatch(fetchPopularMovies());
+    dispatch(fetchPopularShows());
+  }, [dispatch]);
 
   return (
     <Stack
@@ -35,8 +31,8 @@ const Feed = () => {
           width: { md: 'auto', sm: '600px', xs: '320px' },
         }}
       >
-        <Movies movies={movies} />
-        <Shows shows={shows} />
+        <Movies />
+        <Shows />
       </Box>
     </Stack>
   );

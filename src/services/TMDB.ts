@@ -56,11 +56,12 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const DEFAULT_IMAGE_SIZE = 'w500';
 
 class TMDB extends MediaClient {
+  private static instance: TMDB;
   private readonly accessToken: string | undefined;
   private readonly configPromise: Promise<void>;
   private imageBaseUrl: string = '';
 
-  constructor() {
+  private constructor() {
     super();
     this.accessToken = process.env.REACT_APP_MOVIE_DB_ACCESS_TOKEN;
 
@@ -73,6 +74,12 @@ class TMDB extends MediaClient {
     this.configPromise = this.fetchConfiguration();
   }
 
+  public static getInstance(): TMDB {
+    if (!TMDB.instance) TMDB.instance = new TMDB();
+
+    return TMDB.instance;
+  }
+
   private async fetchConfiguration(): Promise<void> {
     try {
       const response = await axios.get<TMDBConfiguration>(`${BASE_URL}/configuration`, {
@@ -81,7 +88,6 @@ class TMDB extends MediaClient {
       this.imageBaseUrl = response.data.images.secure_base_url;
     } catch (error) {
       console.error('Error fetching TMDB configuration:', error);
-      // Fallback to hardcoded URL if configuration fetch fails
       this.imageBaseUrl = 'https://image.tmdb.org/t/p/';
     }
   }

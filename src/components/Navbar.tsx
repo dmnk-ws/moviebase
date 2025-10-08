@@ -31,6 +31,7 @@ const Navbar = () => {
         position: 'sticky',
         background: '#000000',
         top: 0,
+        zIndex: 10,
         padding: { xs: '20px 25px 20px', sm: '20px 50px 20px' },
         alignItems: 'center',
       }}
