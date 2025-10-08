@@ -10,7 +10,7 @@ import { SearchBar, SearchButton, NavbarPopUp, NavbarMenu, HamburgerMenu } from 
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
   const [hasPopover, setHasPopover] = useState(false);
-  const popoverAnchor = useRef(null);
+  const popoverAnchor = useRef<HTMLDivElement>(null);
 
   const handlePopoverOpen = () => {
     setHasPopover(true);
@@ -20,7 +20,7 @@ const Navbar = () => {
     setHasPopover(false);
   };
 
-  const updateActive = (active) => {
+  const updateActive = (active: boolean) => {
     setIsActive(active);
   };
 

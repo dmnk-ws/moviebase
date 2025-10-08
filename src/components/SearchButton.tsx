@@ -1,7 +1,12 @@
 import { Search } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 
-const SearchButton = ({ updateActive, active }) => {
+interface SearchButtonProps {
+  updateActive: (active: boolean) => void;
+  active: boolean;
+}
+
+const SearchButton = ({ updateActive, active }: SearchButtonProps) => {
   const handleClick = () => {
     updateActive(active);
   };

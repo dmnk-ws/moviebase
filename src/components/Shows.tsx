@@ -1,8 +1,13 @@
 import { Stack } from '@mui/material';
 
 import { ShowCard } from './';
+import { Show } from '../services/MediaApi';
 
-const Movies = ({ shows }) => {
+interface ShowsProps {
+  shows: Show[];
+}
+
+const Shows = ({ shows }: ShowsProps) => {
   if (!shows?.length) return 'Loading...';
 
   return (
@@ -17,11 +22,16 @@ const Movies = ({ shows }) => {
         alignItems: { xs: 'center' },
       }}
     >
-      {shows.map((show, index) => (
-        <ShowCard key={index} show={show} />
+      {shows.map((show) => (
+        <ShowCard
+          key={show.id}
+          name={show.name}
+          description={show.description}
+          imagePath={show.imagePath}
+        />
       ))}
     </Stack>
   );
 };
 
-export default Movies;
+export default Shows;

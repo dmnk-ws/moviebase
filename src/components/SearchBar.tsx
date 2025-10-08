@@ -3,7 +3,12 @@ import { SearchButton } from './';
 
 import '../index.css';
 
-const SearchBar = ({ updateActive }) => {
+interface SearchBarProps {
+  updateActive: (active: boolean) => void;
+  padding?: string;
+}
+
+const SearchBar = ({ updateActive, padding }: SearchBarProps) => {
   return (
     <Paper
       component="form"

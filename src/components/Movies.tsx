@@ -1,8 +1,13 @@
 import { Stack } from '@mui/material';
 
 import { MovieCard } from './';
+import { Movie } from '../services/MediaApi';
 
-const Movies = ({ movies }) => {
+interface MoviesProps {
+  movies: Movie[];
+}
+
+const Movies = ({ movies }: MoviesProps) => {
   if (!movies?.length) return 'Loading...';
 
   return (
@@ -17,8 +22,13 @@ const Movies = ({ movies }) => {
         alignItems: { xs: 'center' },
       }}
     >
-      {movies.map((movie, index) => (
-        <MovieCard key={index} movie={movie} />
+      {movies.map((movie) => (
+        <MovieCard
+          key={movie.id}
+          title={movie.title}
+          description={movie.description}
+          imagePath={movie.imagePath}
+        />
       ))}
     </Stack>
   );

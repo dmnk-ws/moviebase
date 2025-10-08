@@ -1,12 +1,13 @@
-import { Card, CardMedia, CardContent, Typography, Link } from '@mui/material';
+import { Card, CardMedia, CardContent, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-const ShowCard = ({
-  show: {
-    titleText: { text },
-    plot: { plotText },
-    primaryImage: { url, caption },
-  },
-}) => {
+interface MovieCardProps {
+  title: string;
+  description: string;
+  imagePath: string | null;
+}
+
+const MovieCard = ({ title, description, imagePath }: MovieCardProps) => {
   return (
     <Card
       sx={{
@@ -17,23 +18,24 @@ const ShowCard = ({
     >
       <Link to="">
         <CardMedia
-          image={url}
-          alt={caption.plainText}
+          component="img"
+          image={imagePath || ''}
+          alt={title}
           sx={{ width: { md: '320px', sm: '550px', xs: '300px' }, height: 180 }}
         />
       </Link>
       <CardContent sx={{ backgroundColor: '#1e1e1e', height: '106px' }}>
         <Link to="">
           <Typography fontWeight="bold" color="#FFFFFF">
-            {text}
+            {title}
           </Typography>
         </Link>
         <Typography fontWeight="light" color="#FFFFFF">
-          {plotText.plainText}
+          {description}
         </Typography>
       </CardContent>
     </Card>
   );
 };
 
-export default ShowCard;
+export default MovieCard;

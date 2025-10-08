@@ -2,17 +2,20 @@ import { useEffect, useState } from 'react';
 import { Stack, Box } from '@mui/material';
 
 import { Movies, Shows } from './';
-import { fetchFromApi } from '../assets/js/fetchFromApi';
+import TMDB from '../services/TMDB';
+import { Movie, Show } from '../services/MediaApi';
+
+const mediaService = new TMDB();
 
 const Feed = () => {
   //const [category, setCategory] = useState(trending)
-  const [movies, setMovies] = useState([]);
-  const [shows, setShows] = useState([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [shows, setShows] = useState<Show[]>([]);
 
   useEffect(() => {
-    fetchFromApi('titles', 'most_pop_movies').then((data) => setMovies(data.results));
+    mediaService.getPopularMovies().then((movies) => setMovies(movies));
 
-    fetchFromApi('titles', 'most_pop_series').then((data) => setShows(data.results));
+    mediaService.getPopularShows().then((shows) => setShows(shows));
   }, []);
 
   return (
