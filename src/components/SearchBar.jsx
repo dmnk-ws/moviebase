@@ -3,23 +3,29 @@ import { SearchButton } from './';
 
 import '../index.css';
 
-const SearchBar = ({updateActive}) => {
-    return (
-        <Paper
-            component="form"
-            onSubmit={() => {}}
-            sx={{ display: 'flex', border: '1px solid #FFFFFF', boxShadow: 'none', background: "#000000", alignItems: 'center' }}
-        >
-            <SearchButton updateActive={updateActive} active={false} />
-            <input
-                className="search-bar"
-                placeholder="Search..."
-                value=""
-                onChange={() => {}}
-            />
-            <i></i>
-        </Paper>
-    )
-}
+const SearchBar = ({ updateActive }) => {
+  return (
+    <Paper
+      component="form"
+      onSubmit={() => {}}
+      sx={{
+        display: 'flex',
+        border: '1px solid #FFFFFF',
+        boxShadow: 'none',
+        background: '#000000',
+        alignItems: 'center',
+      }}
+    >
+      <SearchButton updateActive={updateActive} active={false} />
+      <input
+        className="search-bar"
+        placeholder="Search..."
+        value=""
+        onChange={() => {}}
+      />
+      <i></i>
+    </Paper>
+  );
+};
 
-export default SearchBar
+export default SearchBar;

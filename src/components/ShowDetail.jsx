@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const ShowDetail = () => {
-  return (
-    <div>ShowDetail</div>
-  )
-}
+  return <div>ShowDetail</div>;
+};
 
-export default ShowDetail
+export default ShowDetail;

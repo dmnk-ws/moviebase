@@ -3,13 +3,13 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { PersonOutline } from '@mui/icons-material';
 
 export const navList = [
-    "Start",
-    "Movies",
-    "Shows"
+  { label: 'Start', path: '/' },
+  { label: 'Movies', path: '/movies' },
+  { label: 'Shows', path: '/shows' },
 ];
 
 export const navPopUp = [
-    {name: "My Profile", icon: <PersonOutline sx={{ color: '#FFFFFF' }} /> },
-    {name: "Settings", icon:  <SettingsIcon sx={{ color: '#FFFFFF' }} /> },
-    {name: "Logout", icon: <LogoutIcon sx={{ color: '#FFFFFF' }} /> }
+  { name: 'My Profile', icon: <PersonOutline sx={{ color: '#FFFFFF' }} /> },
+  { name: 'Settings', icon: <SettingsIcon sx={{ color: '#FFFFFF' }} /> },
+  { name: 'Logout', icon: <LogoutIcon sx={{ color: '#FFFFFF' }} /> },
 ];

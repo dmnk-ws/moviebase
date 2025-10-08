@@ -1,44 +1,45 @@
 body {
-    font-family: Roboto;
+  font-family: Roboto, sans-serif;
+  background-color: #000000;
 }
 
 .logo {
-    height: 35px;
+  height: 35px;
 }
 
 .nav-menu {
-    display: none;
+  display: none;
 }
 
 .nav-link:hover {
-    color: #333333;
+  color: #333333;
 }
 
 .search-bar {
-    border: none;
-    outline: none;
-    width: 150px;
-    background: #000000;
-    caret-color: #FFFFFF;
-    font-size: 16px;
+  border: none;
+  outline: none;
+  width: 150px;
+  background: #000000;
+  caret-color: #ffffff;
+  font-size: 16px;
 }
 
 .nav-arrow {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 @media screen and (min-width: 600px) {
-    .logo {
-        height: 45px;
-    }
+  .logo {
+    height: 45px;
+  }
 }
 
 @media screen and (min-width: 900px) {
-    .nav-menu {
-        display: inline-flex;
-    }
+  .nav-menu {
+    display: inline-flex;
+  }
 
-    .search-bar {
-        width: 250px;
-    }
+  .search-bar {
+    width: 250px;
+  }
 }
