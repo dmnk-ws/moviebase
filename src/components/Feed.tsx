@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { Stack, Box } from '@mui/material';
+import { Stack } from '@mui/material';
 
-import { Movies, Shows } from './';
+import { PopularMovies, PopularShows } from './';
 import { useAppDispatch } from '../store/hooks';
 import { fetchPopularMovies } from '../store/movieSlice';
 import { fetchPopularShows } from '../store/showSlice';
@@ -22,18 +22,10 @@ const Feed = () => {
         alignItems: { xs: 'center' },
       }}
     >
-      <Box
-        p={{ xs: 0, md: 2 }}
-        sx={{
-          overflowY: 'auto',
-          height: '90vh',
-          flex: 2,
-          width: { md: 'auto', sm: '600px', xs: '320px' },
-        }}
-      >
-        <Movies />
-        <Shows />
-      </Box>
+      <Stack spacing={10} maxWidth="90%" marginTop={5}>
+        <PopularShows />
+        <PopularMovies />
+      </Stack>
     </Stack>
   );
 };
