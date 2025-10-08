@@ -3,7 +3,7 @@ import { Stack, Box } from '@mui/material';
 
 import { Movies, Shows } from './';
 import TMDB from '../services/TMDB';
-import { Movie, Show } from '../services/MediaApi';
+import { Movie, Show } from '../services/MediaClient';
 
 const mediaService = new TMDB();
 

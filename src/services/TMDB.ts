@@ -1,5 +1,10 @@
 import axios from 'axios';
-import MediaApi, { Movie, Show, QueryParams, PaginatedResponse } from './MediaApi';
+import MediaClient, {
+  Movie,
+  Show,
+  QueryParams,
+  PaginatedResponse,
+} from './MediaClient';
 
 interface TMDBMovie {
   id: number;
@@ -50,7 +55,7 @@ interface TMDBConfiguration {
 const BASE_URL = 'https://api.themoviedb.org/3';
 const DEFAULT_IMAGE_SIZE = 'w500';
 
-class TMDB extends MediaApi {
+class TMDB extends MediaClient {
   private readonly accessToken: string | undefined;
   private readonly configPromise: Promise<void>;
   private imageBaseUrl: string = '';

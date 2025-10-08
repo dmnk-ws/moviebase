@@ -30,7 +30,7 @@ export interface PaginatedResponse<T> {
  * Abstract class for media (movies and TV shows) API services
  * Extend this class to create service implementations for different APIs
  */
-export default abstract class MediaApi {
+export default abstract class MediaClient {
   /**
    * Fetch popular movies
    * @param params - Query parameters (page, language, etc.)

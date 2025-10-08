@@ -1,7 +1,7 @@
 import { Stack } from '@mui/material';
 
 import { ShowCard } from './';
-import { Show } from '../services/MediaApi';
+import { Show } from '../services/MediaClient';
 
 interface ShowsProps {
   shows: Show[];

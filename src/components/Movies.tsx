@@ -1,7 +1,7 @@
 import { Stack } from '@mui/material';
 
 import { MovieCard } from './';
-import { Movie } from '../services/MediaApi';
+import { Movie } from '../services/MediaClient';
 
 interface MoviesProps {
   movies: Movie[];
