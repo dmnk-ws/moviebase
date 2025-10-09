@@ -4,66 +4,13 @@ import { Movie } from '../entities/Movie';
 import { Show } from '../entities/Show';
 import { Genre } from '../entities/Genre';
 import { GenreType } from '../enums/GenreType';
-
-interface TMDBMovie {
-  id: number;
-  title: string;
-  original_title: string;
-  overview: string;
-  poster_path: string | null;
-  backdrop_path: string | null;
-  release_date: string;
-  vote_average: number;
-  vote_count: number;
-  popularity: number;
-  adult: boolean;
-  genre_ids: number[];
-  original_language: string;
-  video: boolean;
-}
-
-interface TMDBShow {
-  id: number;
-  name: string;
-  original_name: string;
-  overview: string;
-  poster_path: string | null;
-  backdrop_path: string | null;
-  first_air_date: string;
-  vote_average: number;
-  vote_count: number;
-  popularity: number;
-  genre_ids: number[];
-  original_language: string;
-  origin_country: string[];
-}
-
-interface TMDBConfiguration {
-  images: {
-    base_url: string;
-    secure_base_url: string;
-    backdrop_sizes: string[];
-    logo_sizes: string[];
-    poster_sizes: string[];
-    profile_sizes: string[];
-    still_sizes: string[];
-  };
-  change_keys: string[];
-}
-
-interface PaginatedResponse<T> {
-  page: number;
-  results: T[];
-  total_pages: number;
-  total_results: number;
-}
-
-interface TMDBGenres {
-  genres: {
-    id: number;
-    name: string;
-  }[];
-}
+import {
+  TMDBMovie,
+  TMDBShow,
+  TMDBConfiguration,
+  PaginatedResponse,
+  TMDBGenres,
+} from './interfaces/tmdb';
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const DEFAULT_IMAGE_SIZE = 'w500';
