@@ -22,7 +22,11 @@ const MovieGenre = ({ genre }: MovieGenreProps) => {
   ) : (
     <Carousel>
       {movies.map((movie) => (
-        <MediaCard alt={movie.title} imagePath={movie.imagePath} />
+        <MediaCard
+          to={`/movies/${movie.id}`}
+          alt={movie.title}
+          imagePath={movie.imagePath}
+        />
       ))}
     </Carousel>
   );

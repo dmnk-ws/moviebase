@@ -35,6 +35,7 @@ const Shows = () => {
       {shows.map((show, index) => (
         <TrendingMediaCard
           key={show.id}
+          to={`/shows/${show.id}`}
           alt={show.name}
           imagePath={show.imagePath}
           rank={index + 1}

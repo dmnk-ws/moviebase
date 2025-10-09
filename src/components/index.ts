@@ -22,3 +22,4 @@ export { default as CarouselSkeleton } from './carousel/CarouselSkeleton';
 export { default as Layout } from './Layout';
 export { default as Header } from './Header';
 export { default as MediaCard } from './MediaCard';
+export { default as CardCover } from './CardCover';
