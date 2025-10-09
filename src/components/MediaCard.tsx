@@ -1,10 +1,10 @@
-import { Card, CardMedia, Box, Typography } from '@mui/material';
+import React from 'react';
+import { Box, Card, CardMedia, Typography } from '@mui/material';
 import ImageIcon from '@mui/icons-material/Image';
 
-interface TrendingCardProps {
+interface MediaCardProps {
   alt: string;
   imagePath: string | null;
-  rank: number;
 }
 
 const CARD_DIMENSIONS = {
@@ -12,7 +12,7 @@ const CARD_DIMENSIONS = {
   height: { xs: 225, sm: 270, md: 300 },
 };
 
-const TrendingCard = ({ alt, imagePath, rank }: TrendingCardProps) => {
+const MediaCard = ({ alt, imagePath }: MediaCardProps) => {
   const hasImage = imagePath && imagePath.trim() !== '';
 
   return (
@@ -29,27 +29,6 @@ const TrendingCard = ({ alt, imagePath, rank }: TrendingCardProps) => {
         },
       }}
     >
-      <Typography
-        sx={{
-          position: 'absolute',
-          bottom: 10,
-          left: -20,
-          fontSize: { xs: '2rem', sm: '4rem', md: '6rem' },
-          fontWeight: 900,
-          color: 'black',
-          lineHeight: 1,
-          fontFamily: 'Arial Black, sans-serif',
-          WebkitTextStroke: {
-            xs: '2px white',
-            md: '3px white',
-          },
-          userSelect: 'none',
-          pointerEvents: 'none',
-          zIndex: 11,
-        }}
-      >
-        {rank}
-      </Typography>
       <Card
         sx={{
           width: CARD_DIMENSIONS.width,
@@ -104,4 +83,4 @@ const TrendingCard = ({ alt, imagePath, rank }: TrendingCardProps) => {
   );
 };
 
-export default TrendingCard;
+export default MediaCard;

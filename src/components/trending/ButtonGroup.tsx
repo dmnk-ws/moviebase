@@ -1,17 +1,13 @@
 import React, { MouseEvent } from 'react';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 
-interface TrendingButtonGroupProps {
+interface ButtonGroupProps {
   timeWindow: 'day' | 'week';
   onChange: (_event: MouseEvent<HTMLElement>, timeWindow: 'day' | 'week') => void;
   orientation: 'left' | 'right';
 }
 
-const TrendingButtonGroup = ({
-  timeWindow,
-  onChange,
-  orientation,
-}: TrendingButtonGroupProps) => {
+const ButtonGroup = ({ timeWindow, onChange, orientation }: ButtonGroupProps) => {
   return (
     <ToggleButtonGroup
       value={timeWindow}
@@ -48,4 +44,4 @@ const TrendingButtonGroup = ({
   );
 };
 
-export default TrendingButtonGroup;
+export default ButtonGroup;

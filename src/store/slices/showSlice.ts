@@ -1,7 +1,8 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { QueryParams, Show } from '../services/MediaClient';
-import { MediaService } from '../services/MediaService';
-import { RootState } from './store';
+import { QueryParams } from '../../services/MediaClient';
+import { MediaService } from '../../services/MediaService';
+import { RootState } from '../store';
+import { Show } from '../../entities/Show';
 
 const showAdapter = createEntityAdapter<Show>({});
 
@@ -12,12 +13,22 @@ export const fetchTrendingShows = createAsyncThunk(
   }
 );
 
+export const fetchShowsByGenreId = createAsyncThunk(
+  'shows/fetchByGenreId',
+  async (genre: number) => {
+    const shows = await MediaService.getShowsByGenreId({ genre });
+    return { genre, shows };
+  }
+);
+
 interface ShowState {
   loading: boolean;
+  showsByGenre: Record<number, number[]>;
 }
 
 const initialState = showAdapter.getInitialState<ShowState>({
   loading: false,
+  showsByGenre: {},
 });
 
 const showSlice = createSlice({
@@ -35,6 +46,23 @@ const showSlice = createSlice({
         const shows = action.payload;
 
         if (shows) showAdapter.upsertMany(state, shows);
+      },
+      settled(state) {
+        state.loading = false;
+      },
+    });
+    builder.addAsyncThunk(fetchShowsByGenreId, {
+      pending(state) {
+        state.loading = true;
+      },
+      fulfilled(state, action) {
+        const { genre, shows } = action.payload;
+
+        if (shows) {
+          const limitedShows = shows.slice(0, 20);
+          showAdapter.upsertMany(state, limitedShows);
+          state.showsByGenre[genre] = limitedShows.map((s: Show) => s.id);
+        }
       },
       settled(state) {
         state.loading = false;

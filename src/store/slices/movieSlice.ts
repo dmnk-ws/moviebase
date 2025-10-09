@@ -1,7 +1,8 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { Movie, QueryParams } from '../services/MediaClient';
-import { MediaService } from '../services/MediaService';
-import { RootState } from './store';
+import { QueryParams } from '../../services/MediaClient';
+import { MediaService } from '../../services/MediaService';
+import { RootState } from '../store';
+import { Movie } from '../../entities/Movie';
 
 const movieAdapter = createEntityAdapter<Movie>({});
 
@@ -12,12 +13,22 @@ export const fetchTrendingMovies = createAsyncThunk(
   }
 );
 
+export const fetchMoviesByGenreId = createAsyncThunk(
+  'movies/fetchByGenreId',
+  async (genre: number) => {
+    const movies = await MediaService.getMoviesByGenreId({ genre });
+    return { genre, movies };
+  }
+);
+
 interface MovieState {
   loading: boolean;
+  moviesByGenre: Record<number, number[]>;
 }
 
 const initialState = movieAdapter.getInitialState<MovieState>({
   loading: false,
+  moviesByGenre: {},
 });
 
 const movieSlice = createSlice({
@@ -35,6 +46,23 @@ const movieSlice = createSlice({
         const movies = action.payload;
 
         if (movies) movieAdapter.upsertMany(state, movies);
+      },
+      settled(state) {
+        state.loading = false;
+      },
+    });
+    builder.addAsyncThunk(fetchMoviesByGenreId, {
+      pending(state) {
+        state.loading = true;
+      },
+      fulfilled(state, action) {
+        const { genre, movies } = action.payload;
+
+        if (movies) {
+          const limitedMovies = movies.slice(0, 20);
+          movieAdapter.upsertMany(state, limitedMovies);
+          state.moviesByGenre[genre] = limitedMovies.map((m) => m.id);
+        }
       },
       settled(state) {
         state.loading = false;

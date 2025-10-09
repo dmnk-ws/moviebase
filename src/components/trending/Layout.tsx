@@ -1,11 +1,9 @@
 import React, { MouseEvent } from 'react';
-import { Stack, Typography } from '@mui/material';
+import { Stack } from '@mui/material';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import TrendingButtonGroup from './TrendingButtonGroup';
-import CarouselSkeleton from '../carousel/CarouselSkeleton';
-import { Carousel } from '../index';
+import { Carousel, Header, TrendingButtonGroup, CarouselSkeleton } from '../index';
 
-interface TrendingProps {
+interface LayoutProps {
   header: string;
   timeWindow: 'day' | 'week';
   onTimeWindowChange: (
@@ -16,13 +14,13 @@ interface TrendingProps {
   children: React.ReactNode;
 }
 
-const TrendingLayout = ({
+const Layout = ({
   header,
   timeWindow,
   onTimeWindowChange,
   loading,
   children,
-}: TrendingProps) => {
+}: LayoutProps) => {
   const orientation = timeWindow === 'day' ? 'left' : 'right';
 
   return (
@@ -38,13 +36,7 @@ const TrendingLayout = ({
           <TrendingUpIcon
             sx={{ color: 'white', fontSize: { xs: '1.5rem', md: '2.5rem' } }}
           />
-          <Typography
-            variant="h4"
-            color="white"
-            sx={{ fontSize: { xs: '1.25rem', md: '2rem' } }}
-          >
-            {header}
-          </Typography>
+          <Header text={header} />
         </Stack>
         <TrendingButtonGroup
           timeWindow={timeWindow}
@@ -57,4 +49,4 @@ const TrendingLayout = ({
   );
 };
 
-export default TrendingLayout;
+export default Layout;

@@ -1,10 +1,13 @@
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { fetchTrendingShows, resetAllShows, selectShows } from '../../store/showSlice';
+import {
+  fetchTrendingShows,
+  resetAllShows,
+  selectShows,
+} from '../../store/slices/showSlice';
 import { MouseEvent, useEffect, useState } from 'react';
-import TrendingLayout from './TrendingLayout';
-import TrendingCard from './TrendingCard';
+import { TrendingLayout, TrendingMediaCard } from '../index';
 
-const TrendingShows = () => {
+const Shows = () => {
   const dispatch = useAppDispatch();
   const shows = useAppSelector((state) => selectShows(state));
   const loading = useAppSelector((state) => state.shows.loading);
@@ -30,7 +33,7 @@ const TrendingShows = () => {
       loading={loading || shows.length === 0}
     >
       {shows.map((show, index) => (
-        <TrendingCard
+        <TrendingMediaCard
           key={show.id}
           alt={show.name}
           imagePath={show.imagePath}
@@ -41,4 +44,4 @@ const TrendingShows = () => {
   );
 };
 
-export default TrendingShows;
+export default Shows;

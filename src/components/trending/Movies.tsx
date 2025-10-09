@@ -3,12 +3,11 @@ import {
   fetchTrendingMovies,
   resetAllMovies,
   selectMovies,
-} from '../../store/movieSlice';
+} from '../../store/slices/movieSlice';
 import { useEffect, useState, MouseEvent } from 'react';
-import TrendingLayout from './TrendingLayout';
-import TrendingCard from './TrendingCard';
+import { TrendingMediaCard, TrendingLayout } from '../index';
 
-const TrendingMovies = () => {
+const Movies = () => {
   const dispatch = useAppDispatch();
   const movies = useAppSelector((state) => selectMovies(state));
   const loading = useAppSelector((state) => state.movies.loading);
@@ -34,7 +33,7 @@ const TrendingMovies = () => {
       loading={loading || movies.length === 0}
     >
       {movies.map((movie, index) => (
-        <TrendingCard
+        <TrendingMediaCard
           key={movie.id}
           alt={movie.title}
           imagePath={movie.imagePath}
@@ -45,4 +44,4 @@ const TrendingMovies = () => {
   );
 };
 
-export default TrendingMovies;
+export default Movies;

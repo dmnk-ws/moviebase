@@ -2,13 +2,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Box } from '@mui/material';
 import {
   Navbar,
-  Movies,
+  GenreMovies,
   MovieDetail,
-  Shows,
+  GenreShows,
   ShowDetail,
   Feed,
   SearchFeed,
-  Genre,
 } from './components';
 
 const App = () => {
@@ -18,12 +17,11 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Feed />} />
-          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies/genres" element={<GenreMovies />} />
           <Route path="/movies/:id" element={<MovieDetail />} />
-          <Route path="/shows" element={<Shows />} />
+          <Route path="/shows/genres" element={<GenreShows />} />
           <Route path="/shows/:id" element={<ShowDetail />} />
           <Route path="/search/:searchTerm" element={<SearchFeed />} />
-          <Route path="/genre/:genreTerm" element={<Genre />} />
         </Routes>
       </Box>
     </BrowserRouter>

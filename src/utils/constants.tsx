@@ -4,8 +4,8 @@ import { PersonOutline } from '@mui/icons-material';
 
 export const navList = [
   { label: 'Start', path: '/' },
-  { label: 'Movies', path: '/movies' },
-  { label: 'Shows', path: '/shows' },
+  { label: 'Movies', path: '/movies/genres' },
+  { label: 'Shows', path: '/shows/genres' },
 ];
 
 export const navPopUp = [

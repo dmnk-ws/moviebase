@@ -1,30 +1,12 @@
+import { Movie } from '../entities/Movie';
+import { Show } from '../entities/Show';
+import { Genre } from '../entities/Genre';
+
 export interface QueryParams {
   page?: number;
   language?: string;
   timeWindow?: 'day' | 'week';
-}
-
-export interface Movie {
-  id: number;
-  title: string;
-  description: string;
-  overview: string;
-  imagePath: string | null;
-}
-
-export interface Show {
-  id: number;
-  name: string;
-  description: string;
-  overview: string;
-  imagePath: string | null;
-}
-
-export interface PaginatedResponse<T> {
-  page: number;
-  results: T[];
-  total_pages: number;
-  total_results: number;
+  genre?: number;
 }
 
 /**
@@ -35,50 +17,42 @@ export default abstract class MediaClient {
   /**
    * Fetch trending movies
    * @param params - Query parameters (page, language, timeWindow)
-   * @returns Response with results array and metadata
+   * @returns Response with Movie[]
    */
   public abstract getTrendingMovies(params?: QueryParams): Promise<Movie[]>;
 
   /**
    * Fetch trending TV shows
    * @param params - Query parameters (page, language, timeWindow)
-   * @returns Response with results array and metadata
+   * @returns Response with Show[]
    */
   public abstract getTrendingShows(params?: QueryParams): Promise<Show[]>;
 
   /**
-   * Search for movies
-   * @param query - Search query
-   * @param params - Additional query parameters
-   * @returns Response with results array and metadata
+   * Fetch movie genres
+   * @param params - Query parameters
+   * @return Response with Genre[] of type 'movie'
    */
-  public abstract searchMovies(
-    query: string,
-    params?: QueryParams
-  ): Promise<PaginatedResponse<Movie>>;
+  public abstract getMovieGenres(params?: QueryParams): Promise<Genre[]>;
 
   /**
-   * Search for TV shows
-   * @param query - Search query
-   * @param params - Additional query parameters
-   * @returns Response with results array and metadata
+   * Fetch show genres
+   * @param params - Query parameters
+   * @return Response with Genre[] of type 'show'
    */
-  public abstract searchShows(
-    query: string,
-    params?: QueryParams
-  ): Promise<PaginatedResponse<Show>>;
+  public abstract getShowGenres(params?: QueryParams): Promise<Genre[]>;
 
   /**
-   * Get movie details by ID
-   * @param id - Movie ID
-   * @returns Movie details
+   * Fetch movies by genre ID
+   * @param params - Query parameters including genre ID
+   * @returns Response with Movie[]
    */
-  public abstract getMovieDetails(id: string | number): Promise<Movie>;
+  public abstract getMoviesByGenreId(params?: QueryParams): Promise<Movie[]>;
 
   /**
-   * Get TV show details by ID
-   * @param id - TV show ID
-   * @returns TV show details
+   * Fetch shows by genre ID
+   * @param params - Query parameters including genre ID
+   * @returns Response with Show[]
    */
-  public abstract getShowDetails(id: string | number): Promise<Show>;
+  public abstract getShowsByGenreId(params?: QueryParams): Promise<Show[]>;
 }

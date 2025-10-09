@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import movieSlice from './movieSlice';
-import showSlice from './showSlice';
+import movieSlice from './slices/movieSlice';
+import showSlice from './slices/showSlice';
+import genreSlice from './slices/genreSlice';
 import logger from 'redux-logger';
 
 const isDevelopment = import.meta.env.MODE === 'development';
@@ -9,6 +10,7 @@ export const store = configureStore({
   reducer: {
     movies: movieSlice,
     shows: showSlice,
+    genres: genreSlice,
   },
   middleware: (getDefaultMiddleware) => {
     const middleware = getDefaultMiddleware();
