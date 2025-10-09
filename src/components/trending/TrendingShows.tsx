@@ -27,7 +27,7 @@ const TrendingShows = () => {
       header="Trending Shows"
       timeWindow={timeWindow}
       onTimeWindowChange={handleTimeWindowChange}
-      loading={loading}
+      loading={loading || shows.length === 0}
     >
       {shows.map((show, index) => (
         <TrendingCard

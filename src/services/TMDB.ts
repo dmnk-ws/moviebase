@@ -64,11 +64,11 @@ class TMDB extends MediaClient {
 
   private constructor() {
     super();
-    this.accessToken = process.env.REACT_APP_MOVIE_DB_ACCESS_TOKEN;
+    this.accessToken = import.meta.env.VITE_MOVIE_DB_ACCESS_TOKEN;
 
     if (!this.accessToken) {
       console.warn(
-        'REACT_APP_MOVIE_DB_ACCESS_TOKEN is not set in environment variables'
+        'VITE_MOVIE_DB_ACCESS_TOKEN is not set in environment variables'
       );
     }
 

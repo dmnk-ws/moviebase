@@ -31,7 +31,7 @@ const TrendingMovies = () => {
       header="Trending Movies"
       timeWindow={timeWindow}
       onTimeWindowChange={handleTimeWindowChange}
-      loading={loading}
+      loading={loading || movies.length === 0}
     >
       {movies.map((movie, index) => (
         <TrendingCard
