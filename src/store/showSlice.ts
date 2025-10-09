@@ -1,15 +1,16 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { Show } from '../services/MediaClient';
+import { QueryParams, Show } from '../services/MediaClient';
 import { MediaService } from '../services/MediaService';
 import { RootState } from './store';
 
-const showAdapter = createEntityAdapter<Show>({
-  sortComparer: (a, b) => a.id - b.id,
-});
+const showAdapter = createEntityAdapter<Show>({});
 
-export const fetchPopularShows = createAsyncThunk('shows/fetchPopular', async () => {
-  return await MediaService.getPopularShows();
-});
+export const fetchTrendingShows = createAsyncThunk(
+  'shows/fetchTrending',
+  async (params?: QueryParams) => {
+    return await MediaService.getTrendingShows(params);
+  }
+);
 
 interface ShowState {
   loading: boolean;
@@ -22,9 +23,11 @@ const initialState = showAdapter.getInitialState<ShowState>({
 const showSlice = createSlice({
   name: 'shows',
   initialState,
-  reducers: {},
+  reducers: {
+    resetAllShows: (state) => showAdapter.removeAll(state),
+  },
   extraReducers: (builder) => {
-    builder.addAsyncThunk(fetchPopularShows, {
+    builder.addAsyncThunk(fetchTrendingShows, {
       pending(state) {
         state.loading = true;
       },
@@ -43,5 +46,7 @@ const showSlice = createSlice({
 export const { selectAll: selectShows } = showAdapter.getSelectors<RootState>(
   (state) => state.shows
 );
+
+export const resetAllShows = showSlice.actions.resetAllShows;
 
 export default showSlice.reducer;

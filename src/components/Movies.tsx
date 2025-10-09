@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack } from '@mui/material';
-import PopularMovies from './PopularMovies';
+import { TrendingMovies } from './index';
 
 const Movies = () => {
   return (
@@ -12,7 +12,7 @@ const Movies = () => {
       }}
     >
       <Stack spacing={10} maxWidth="90%" marginTop={5}>
-        <PopularMovies />
+        <TrendingMovies />
       </Stack>
     </Stack>
   );

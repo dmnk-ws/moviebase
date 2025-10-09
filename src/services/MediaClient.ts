@@ -1,6 +1,7 @@
 export interface QueryParams {
   page?: number;
   language?: string;
+  timeWindow?: 'day' | 'week';
 }
 
 export interface Movie {
@@ -32,18 +33,18 @@ export interface PaginatedResponse<T> {
  */
 export default abstract class MediaClient {
   /**
-   * Fetch popular movies
-   * @param params - Query parameters (page, language, etc.)
+   * Fetch trending movies
+   * @param params - Query parameters (page, language, timeWindow)
    * @returns Response with results array and metadata
    */
-  public abstract getPopularMovies(params?: QueryParams): Promise<Movie[]>;
+  public abstract getTrendingMovies(params?: QueryParams): Promise<Movie[]>;
 
   /**
-   * Fetch popular TV shows
-   * @param params - Query parameters (page, language, etc.)
+   * Fetch trending TV shows
+   * @param params - Query parameters (page, language, timeWindow)
    * @returns Response with results array and metadata
    */
-  public abstract getPopularShows(params?: QueryParams): Promise<Show[]>;
+  public abstract getTrendingShows(params?: QueryParams): Promise<Show[]>;
 
   /**
    * Search for movies

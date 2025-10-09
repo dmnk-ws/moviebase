@@ -1,30 +1,27 @@
-import { useEffect } from 'react';
 import { Stack } from '@mui/material';
-
-import { PopularMovies, PopularShows } from './';
-import { useAppDispatch } from '../store/hooks';
-import { fetchPopularMovies } from '../store/movieSlice';
-import { fetchPopularShows } from '../store/showSlice';
+import { TrendingMovies, TrendingShows } from './index';
 
 const Feed = () => {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchPopularMovies());
-    dispatch(fetchPopularShows());
-  }, [dispatch]);
-
   return (
     <Stack
       sx={{
         display: 'flex',
         justifyContent: { xs: 'center' },
         alignItems: { xs: 'center' },
+        paddingX: 2,
       }}
     >
-      <Stack spacing={10} maxWidth="90%" marginTop={5}>
-        <PopularShows />
-        <PopularMovies />
+      <Stack
+        spacing={{ xs: 2, md: 10 }}
+        sx={{
+          mx: { xs: 0, md: 25, '2xl': 'auto' },
+          maxWidth: '1280px',
+          mt: { xs: 2, md: 10 },
+          width: '100%',
+        }}
+      >
+        <TrendingMovies />
+        <TrendingShows />
       </Stack>
     </Stack>
   );

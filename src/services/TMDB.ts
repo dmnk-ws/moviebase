@@ -57,6 +57,7 @@ const DEFAULT_IMAGE_SIZE = 'w500';
 
 class TMDB extends MediaClient {
   private static instance: TMDB;
+
   private readonly accessToken: string | undefined;
   private readonly configPromise: Promise<void>;
   private imageBaseUrl: string = '';
@@ -80,42 +81,12 @@ class TMDB extends MediaClient {
     return TMDB.instance;
   }
 
-  private async fetchConfiguration(): Promise<void> {
-    try {
-      const response = await axios.get<TMDBConfiguration>(`${BASE_URL}/configuration`, {
-        headers: this.getHeaders(),
-      });
-      this.imageBaseUrl = response.data.images.secure_base_url;
-    } catch (error) {
-      console.error('Error fetching TMDB configuration:', error);
-      this.imageBaseUrl = 'https://image.tmdb.org/t/p/';
-    }
-  }
-
-  private async buildImageUrl(
-    path: string | null,
-    size: string = DEFAULT_IMAGE_SIZE
-  ): Promise<string | null> {
-    if (!path) return null;
-
-    await this.configPromise;
-
-    return `${this.imageBaseUrl}${size}${path}`;
-  }
-
-  private getHeaders() {
-    return {
-      Authorization: `Bearer ${this.accessToken}`,
-      'Content-Type': 'application/json',
-    };
-  }
-
-  public async getPopularMovies(params: QueryParams = {}): Promise<Movie[]> {
-    const { page = 1, language = 'en-US' } = params;
+  public async getTrendingMovies(params: QueryParams = {}): Promise<Movie[]> {
+    const { page = 1, language = 'en-US', timeWindow = 'day' } = params;
 
     try {
       const response = await axios.get<PaginatedResponse<TMDBMovie>>(
-        `${BASE_URL}/movie/popular`,
+        `${BASE_URL}/trending/movie/${timeWindow}`,
         {
           headers: this.getHeaders(),
           params: {
@@ -140,12 +111,12 @@ class TMDB extends MediaClient {
     }
   }
 
-  public async getPopularShows(params: QueryParams = {}): Promise<Show[]> {
-    const { page = 1, language = 'en-US' } = params;
+  public async getTrendingShows(params: QueryParams = {}): Promise<Show[]> {
+    const { page = 1, language = 'en-US', timeWindow = 'day' } = params;
 
     try {
       const response = await axios.get<PaginatedResponse<TMDBShow>>(
-        `${BASE_URL}/tv/popular`,
+        `${BASE_URL}/trending/tv/${timeWindow}`,
         {
           headers: this.getHeaders(),
           params: {
@@ -246,6 +217,36 @@ class TMDB extends MediaClient {
       console.error(`Error fetching TV show details for ID ${id}:`, error);
       throw error;
     }
+  }
+
+  private async fetchConfiguration(): Promise<void> {
+    try {
+      const response = await axios.get<TMDBConfiguration>(`${BASE_URL}/configuration`, {
+        headers: this.getHeaders(),
+      });
+      this.imageBaseUrl = response.data.images.secure_base_url;
+    } catch (error) {
+      console.error('Error fetching TMDB configuration:', error);
+      this.imageBaseUrl = 'https://image.tmdb.org/t/p/';
+    }
+  }
+
+  private async buildImageUrl(
+    path: string | null,
+    size: string = DEFAULT_IMAGE_SIZE
+  ): Promise<string | null> {
+    if (!path) return null;
+
+    await this.configPromise;
+
+    return `${this.imageBaseUrl}${size}${path}`;
+  }
+
+  private getHeaders() {
+    return {
+      Authorization: `Bearer ${this.accessToken}`,
+      'Content-Type': 'application/json',
+    };
   }
 }
 

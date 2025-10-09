@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack } from '@mui/material';
-import PopularShows from './PopularShows';
+import { TrendingShows } from './index';
 
 const Shows = () => {
   return (
@@ -12,7 +12,7 @@ const Shows = () => {
       }}
     >
       <Stack spacing={10} maxWidth="90%" marginTop={5}>
-        <PopularShows />
+        <TrendingShows />
       </Stack>
     </Stack>
   );

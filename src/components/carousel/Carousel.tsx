@@ -35,7 +35,11 @@ const Carousel = ({ children }: CarouselProps) => {
       position="relative"
       width="100%"
       marginBottom={3}
-      sx={{ '&:hover .carousel-arrow': { opacity: 1 } }}
+      paddingX={2}
+      sx={{
+        '&:hover .carousel-arrow': { opacity: 1 },
+        boxSizing: 'border-box',
+      }}
     >
       {showLeftArrow && (
         <CarouselButton
@@ -48,8 +52,8 @@ const Carousel = ({ children }: CarouselProps) => {
         ref={scrollRef}
         onScroll={handleScroll}
         display="flex"
-        gap={3}
-        paddingY={2}
+        gap={4}
+        padding={4}
         sx={{
           overflowX: 'scroll',
           overflowY: 'visible',

@@ -13,6 +13,7 @@ const CarouselButton = ({ icon, direction, onClick }: CarouselButtonProps) => {
       className="carousel-arrow"
       onClick={onClick}
       sx={{
+        display: { xs: 'none', md: 'flex' },
         position: 'absolute',
         [direction]: 0,
         top: 0,
