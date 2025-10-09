@@ -15,9 +15,9 @@ const Movies = () => {
 
   const handleTimeWindowChange = (
     _event: MouseEvent<HTMLElement>,
-    newTimeWindow: 'day' | 'week'
+    timeWindow: 'day' | 'week'
   ) => {
-    setTimeWindow(newTimeWindow);
+    setTimeWindow(timeWindow);
   };
 
   useEffect(() => {

@@ -6,7 +6,9 @@ import { Genre } from '../entities/Genre';
 import { GenreType } from '../enums/GenreType';
 import {
   TMDBMovie,
+  TMDBMovieDetails,
   TMDBShow,
+  TMDBShowDetails,
   TMDBConfiguration,
   PaginatedResponse,
   TMDBGenres,
@@ -14,6 +16,7 @@ import {
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const DEFAULT_IMAGE_SIZE = 'w500';
+const DEFAULT_BACKDROP_SIZE = 'w1280';
 
 class TMDB extends MediaClient {
   private static instance: TMDB;
@@ -189,6 +192,69 @@ class TMDB extends MediaClient {
       );
     } catch (error) {
       console.error('Error fetching shows by genreId:', error);
+      throw error;
+    }
+  }
+
+  public async getMovieById(id: number): Promise<Movie> {
+    try {
+      const response = await axios.get<TMDBMovieDetails>(`${BASE_URL}/movie/${id}`, {
+        headers: this.getHeaders(),
+      });
+
+      const movie = response.data;
+
+      return {
+        id: movie.id,
+        title: movie.title,
+        description: movie.overview,
+        overview: movie.overview,
+        imagePath: await this.buildImageUrl(movie.poster_path),
+        backdropPath: await this.buildImageUrl(
+          movie.backdrop_path,
+          DEFAULT_BACKDROP_SIZE
+        ),
+        releaseDate: movie.release_date,
+        genres: movie.genres,
+        runtime: movie.runtime,
+        voteAverage: movie.vote_average,
+      };
+    } catch (error) {
+      console.error('Error fetching movie by id:', error);
+      throw error;
+    }
+  }
+
+  public async getShowById(id: number): Promise<Show> {
+    try {
+      const response = await axios.get<TMDBShowDetails>(`${BASE_URL}/tv/${id}`, {
+        headers: this.getHeaders(),
+      });
+
+      const show = response.data;
+
+      return {
+        id: show.id,
+        name: show.name,
+        description: show.overview,
+        overview: show.overview,
+        imagePath: await this.buildImageUrl(show.poster_path),
+        backdropPath: await this.buildImageUrl(
+          show.backdrop_path,
+          DEFAULT_BACKDROP_SIZE
+        ),
+        firstAirDate: show.first_air_date,
+        genres: show.genres,
+        createdBy: show.created_by.map((creator) => ({
+          id: creator.id,
+          name: creator.name,
+        })),
+        numberOfSeasons: show.number_of_seasons,
+        numberOfEpisodes: show.number_of_episodes,
+        voteAverage: show.vote_average,
+      };
+    } catch (error) {
+      console.error('Error fetching show by id:', error);
       throw error;
     }
   }

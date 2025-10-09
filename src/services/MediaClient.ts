@@ -55,4 +55,18 @@ export default abstract class MediaClient {
    * @returns Response with Show[]
    */
   public abstract getShowsByGenreId(params?: QueryParams): Promise<Show[]>;
+
+  /**
+   * Fetch movie by id
+   * @param id
+   * @returns Response with Movie
+   */
+  public abstract getMovieById(id: number): Promise<Movie>;
+
+  /**
+   * Fetch show by id
+   * @param id
+   * @returns Response with Show
+   */
+  public abstract getShowById(id: number): Promise<Show>;
 }

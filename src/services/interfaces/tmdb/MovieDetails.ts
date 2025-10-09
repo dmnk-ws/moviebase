@@ -1,3 +1,5 @@
+import { Genre } from '../../../entities/Genre';
+
 export default interface MovieDetails {
   adult: boolean;
   backdrop_path: string | null;
@@ -8,10 +10,7 @@ export default interface MovieDetails {
     backdrop_path: string | null;
   } | null;
   budget: number;
-  genres: Array<{
-    id: number;
-    name: string;
-  }>;
+  genres: Genre[];
   homepage: string;
   id: number;
   imdb_id: string | null;

@@ -1,3 +1,5 @@
+import { Genre } from '../../../entities/Genre';
+
 export default interface ShowDetails {
   adult: boolean;
   backdrop_path: string | null;
@@ -11,10 +13,7 @@ export default interface ShowDetails {
   }>;
   episode_run_time: number[];
   first_air_date: string;
-  genres: Array<{
-    id: number;
-    name: string;
-  }>;
+  genres: Genre[];
   homepage: string;
   id: number;
   in_production: boolean;

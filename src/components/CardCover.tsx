@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardMedia, Box, Typography } from '@mui/material';
+import { Card, Box, Typography } from '@mui/material';
 import ImageIcon from '@mui/icons-material/Image';
 
 export interface CardCoverProps {
@@ -30,16 +30,25 @@ const CardCover = ({ to, alt, imagePath }: CardCoverProps) => {
         zIndex: 2,
       }}
     >
-      <Link to={to}>
+      <Link
+        to={to}
+        style={{
+          textDecoration: 'none',
+          display: 'flex',
+          height: '100%',
+          width: '100%',
+        }}
+      >
         {hasImage ? (
-          <CardMedia
+          <Box
             component="img"
-            image={imagePath}
+            src={imagePath}
             alt={alt}
             sx={{
               width: '100%',
               height: '100%',
               objectFit: 'cover',
+              display: 'block',
             }}
           />
         ) : (

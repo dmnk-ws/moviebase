@@ -3,11 +3,12 @@ import { Box } from '@mui/material';
 import {
   Navbar,
   GenreMovies,
-  MovieDetail,
+  MovieLoader,
   GenreShows,
-  ShowDetail,
+  ShowLoader,
   Feed,
   SearchFeed,
+  NotFound,
 } from './components';
 
 const App = () => {
@@ -18,10 +19,11 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Feed />} />
           <Route path="/movies/genres" element={<GenreMovies />} />
-          <Route path="/movies/:id" element={<MovieDetail />} />
+          <Route path="/movies/:id" element={<MovieLoader />} />
           <Route path="/shows/genres" element={<GenreShows />} />
-          <Route path="/shows/:id" element={<ShowDetail />} />
+          <Route path="/shows/:id" element={<ShowLoader />} />
           <Route path="/search/:searchTerm" element={<SearchFeed />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Box>
     </BrowserRouter>

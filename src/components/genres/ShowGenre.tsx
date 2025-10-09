@@ -23,6 +23,7 @@ const ShowGenre = ({ genre }: ShowGenreProps) => {
     <Carousel>
       {shows.map((show) => (
         <MediaCard
+          key={show.id}
           to={`/shows/${show.id}`}
           alt={show.name}
           imagePath={show.imagePath}

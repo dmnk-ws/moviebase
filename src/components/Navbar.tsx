@@ -1,16 +1,15 @@
 import { Stack, Box, Avatar, Popover } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { ExpandMore } from '@mui/icons-material';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 import logo from '../assets/images/logo.png';
 import profile from '../assets/images/profile.png';
-import { SearchBar, SearchButton, NavbarPopUp, NavbarMenu, HamburgerMenu } from './';
+import { NavbarPopUp, NavbarMenu, HamburgerMenu } from './';
 
 const Navbar = () => {
-  const [isActive, setIsActive] = useState(false);
   const [hasPopover, setHasPopover] = useState(false);
-  const popoverAnchor = useRef<HTMLDivElement>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
 
   const handlePopoverOpen = () => {
     setHasPopover(true);
@@ -18,10 +17,6 @@ const Navbar = () => {
 
   const handlePopoverClose = () => {
     setHasPopover(false);
-  };
-
-  const updateActive = (active: boolean) => {
-    setIsActive(active);
   };
 
   return (
@@ -53,13 +48,8 @@ const Navbar = () => {
           right: { xs: '25px', sm: '50px' },
         }}
       >
-        {isActive ? (
-          <SearchBar padding="10px" updateActive={updateActive} />
-        ) : (
-          <SearchButton updateActive={updateActive} active={true} />
-        )}
         <Stack
-          ref={popoverAnchor}
+          ref={setAnchorEl}
           aria-owns="mouse-over-popover"
           aria-haspopup="true"
           onMouseEnter={handlePopoverOpen}
@@ -81,7 +71,7 @@ const Navbar = () => {
             id="mouse-over-popover"
             sx={{ pointerEvents: 'none' }}
             open={hasPopover}
-            anchorEl={popoverAnchor.current}
+            anchorEl={anchorEl}
             anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
             transformOrigin={{ vertical: 'top', horizontal: 'left' }}
             slotProps={{

@@ -21,6 +21,13 @@ export const fetchMoviesByGenreId = createAsyncThunk(
   }
 );
 
+export const fetchMovieById = createAsyncThunk(
+  'movies/fetchById',
+  async (id: number) => {
+    return await MediaService.getMovieById(id);
+  }
+);
+
 interface MovieState {
   loading: boolean;
   moviesByGenre: Record<number, number[]>;
@@ -68,12 +75,24 @@ const movieSlice = createSlice({
         state.loading = false;
       },
     });
+    builder.addAsyncThunk(fetchMovieById, {
+      pending(state) {
+        state.loading = true;
+      },
+      fulfilled(state, action) {
+        const movie = action.payload;
+
+        if (movie) movieAdapter.upsertOne(state, movie);
+      },
+      settled(state) {
+        state.loading = false;
+      },
+    });
   },
 });
 
-export const { selectAll: selectMovies } = movieAdapter.getSelectors<RootState>(
-  (state) => state.movies
-);
+export const { selectAll: selectMovies, selectById: selectMovieById } =
+  movieAdapter.getSelectors<RootState>((state) => state.movies);
 
 export const resetAllMovies = movieSlice.actions.resetAllMovies;
 

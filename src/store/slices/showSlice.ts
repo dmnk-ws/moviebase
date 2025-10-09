@@ -21,6 +21,10 @@ export const fetchShowsByGenreId = createAsyncThunk(
   }
 );
 
+export const fetchShowById = createAsyncThunk('shows/fetchById', async (id: number) => {
+  return await MediaService.getShowById(id);
+});
+
 interface ShowState {
   loading: boolean;
   showsByGenre: Record<number, number[]>;
@@ -68,12 +72,24 @@ const showSlice = createSlice({
         state.loading = false;
       },
     });
+    builder.addAsyncThunk(fetchShowById, {
+      pending(state) {
+        state.loading = true;
+      },
+      fulfilled(state, action) {
+        const show = action.payload;
+
+        if (show) showAdapter.upsertOne(state, show);
+      },
+      settled(state) {
+        state.loading = false;
+      },
+    });
   },
 });
 
-export const { selectAll: selectShows } = showAdapter.getSelectors<RootState>(
-  (state) => state.shows
-);
+export const { selectAll: selectShows, selectById: selectShowById } =
+  showAdapter.getSelectors<RootState>((state) => state.shows);
 
 export const resetAllShows = showSlice.actions.resetAllShows;
 

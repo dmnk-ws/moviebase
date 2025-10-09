@@ -1,4 +1,4 @@
-export const enum GenreType {
+export enum GenreType {
   MOVIE = 'movie',
   SHOW = 'show',
 }
