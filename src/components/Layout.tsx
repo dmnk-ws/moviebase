@@ -13,6 +13,8 @@ const Layout = ({ children }: LayoutProps) => {
         justifyContent: { xs: 'center' },
         alignItems: { xs: 'center' },
         paddingX: 2,
+        minHeight: '100vh',
+        marginBottom: 10,
       }}
     >
       <Stack
@@ -22,6 +24,7 @@ const Layout = ({ children }: LayoutProps) => {
           maxWidth: '1280px',
           mt: { xs: 2, md: 10 },
           width: '100%',
+          flex: 1,
         }}
       >
         {children}

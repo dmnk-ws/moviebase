@@ -19,7 +19,7 @@ const Navbar = () => {
       position="sticky"
       sx={{
         background: 'black',
-        boxShadow: 'none',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
       }}
     >
       <Container maxWidth={false} disableGutters>
