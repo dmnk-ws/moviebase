@@ -3,7 +3,6 @@ import {
   Box,
   Stack,
   Typography,
-  Popover,
   MenuList,
   MenuItem,
   ListItemText,
@@ -11,6 +10,7 @@ import {
 import { ExpandMore } from '@mui/icons-material';
 import { navMenuList } from '../../utils/constants';
 import { Link } from 'react-router-dom';
+import NavPopover from './NavPopover';
 
 const DesktopMenu = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -59,33 +59,10 @@ const DesktopMenu = () => {
                   }}
                 />
               </Box>
-              <Popover
+              <NavPopover
                 open={openMenu === nav.name}
-                anchorEl={anchorEl}
-                onClose={handleMouseLeave}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                slotProps={{
-                  paper: {
-                    onMouseLeave: handleMouseLeave,
-                    sx: {
-                      background: 'black',
-                      border: '1px solid #FFFFFF',
-                      marginTop: '8px',
-                      pointerEvents: 'auto',
-                    },
-                  },
-                }}
-                sx={{
-                  pointerEvents: 'none',
-                  display: { xs: 'none', md: 'block' },
-                }}
+                anchor={anchorEl}
+                onLeave={handleMouseLeave}
               >
                 <MenuList>
                   {nav.entries.map((entry) => (
@@ -106,7 +83,7 @@ const DesktopMenu = () => {
                     </MenuItem>
                   ))}
                 </MenuList>
-              </Popover>
+              </NavPopover>
             </>
           ) : (
             <Box

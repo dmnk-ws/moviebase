@@ -1,9 +1,10 @@
 import React, { MouseEvent, useState } from 'react';
-import { Box, Typography, IconButton, Menu, MenuItem } from '@mui/material';
+import { Box, Typography, IconButton, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { ChevronRight } from '@mui/icons-material';
 import { navMenuList } from '../../utils/constants';
 import { Link } from 'react-router-dom';
+import NavMenu from './NavMenu';
 
 const MobileMenu = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -47,32 +48,7 @@ const MobileMenu = () => {
       >
         <MenuIcon sx={{ fontSize: 'xx-large' }} />
       </IconButton>
-      <Menu
-        id="menu-appbar"
-        anchorEl={anchorElNav}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-        open={Boolean(anchorElNav)}
-        onClose={handleCloseNavMenu}
-        sx={{
-          display: { xs: 'block', md: 'none' },
-        }}
-        slotProps={{
-          paper: {
-            sx: {
-              background: 'black',
-              border: '1px solid white',
-            },
-          },
-        }}
-      >
+      <NavMenu anchor={anchorElNav} onClose={handleCloseNavMenu}>
         {navMenuList.map((nav) => (
           <MenuItem
             key={nav.name}
@@ -98,33 +74,8 @@ const MobileMenu = () => {
             {nav.entries && <ChevronRight sx={{ color: 'white' }} />}
           </MenuItem>
         ))}
-      </Menu>
-      <Menu
-        id="submenu-appbar"
-        anchorEl={anchorElSub}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-        open={Boolean(anchorElSub)}
-        onClose={handleCloseSubMenu}
-        sx={{
-          display: { xs: 'block', md: 'none' },
-        }}
-        slotProps={{
-          paper: {
-            sx: {
-              background: 'black',
-              border: '1px solid white',
-            },
-          },
-        }}
-      >
+      </NavMenu>
+      <NavMenu anchor={anchorElSub} onClose={handleCloseSubMenu}>
         {currentSubMenu?.entries?.map((entry) => (
           <MenuItem
             key={entry.name}
@@ -140,7 +91,7 @@ const MobileMenu = () => {
             <Typography sx={{ color: 'white' }}>{entry.name}</Typography>
           </MenuItem>
         ))}
-      </Menu>
+      </NavMenu>
     </Box>
   );
 };

@@ -1,9 +1,10 @@
 import React, { MouseEvent, useState } from 'react';
-import { Avatar, Box, MenuList, Popover } from '@mui/material';
+import { Avatar, Box, MenuList } from '@mui/material';
 import profile from '../../assets/images/profile.png';
 import { ExpandMore } from '@mui/icons-material';
 import { profileList } from '../../utils/constants';
 import PopoverEntry from './PopoverEntry';
+import NavPopover from './NavPopover';
 
 const DesktopAvatar = () => {
   const [anchor, setAnchor] = useState<null | HTMLElement>(null);
@@ -43,34 +44,7 @@ const DesktopAvatar = () => {
           }}
         />
       </Box>
-      <Popover
-        open={open}
-        anchorEl={anchor}
-        onClose={handleLeave}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        slotProps={{
-          paper: {
-            onMouseLeave: handleLeave,
-            sx: {
-              background: 'black',
-              border: '1px solid #FFFFFF',
-              marginTop: '8px',
-              pointerEvents: 'auto',
-            },
-          },
-        }}
-        sx={{
-          pointerEvents: 'none',
-          display: { xs: 'none', md: 'block' },
-        }}
-      >
+      <NavPopover open={open} anchor={anchor} onLeave={handleLeave}>
         <MenuList>
           {profileList.map((item) => (
             <PopoverEntry
@@ -81,7 +55,7 @@ const DesktopAvatar = () => {
             />
           ))}
         </MenuList>
-      </Popover>
+      </NavPopover>
     </>
   );
 };
