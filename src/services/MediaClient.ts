@@ -1,6 +1,7 @@
 import { Movie } from '../entities/Movie';
 import { Show } from '../entities/Show';
 import { Genre } from '../entities/Genre';
+import { Videos } from '../entities/Videos';
 
 export interface QueryParams {
   page?: number;
@@ -69,4 +70,18 @@ export default abstract class MediaClient {
    * @returns Response with Show
    */
   public abstract getShowById(id: number): Promise<Show>;
+
+  /**
+   * Search for movie videos by id
+   * @param id - Movie id
+   * @returns Response with Videos results
+   */
+  public abstract getMovieVideosById(id: number): Promise<Videos>;
+
+  /**
+   * Search for show videos by id
+   * @param id - Show id
+   * @returns Response with Videos results
+   */
+  public abstract getShowVideosById(id: number): Promise<Videos>;
 }

@@ -12,7 +12,9 @@ import {
   TMDBConfiguration,
   PaginatedResponse,
   TMDBGenres,
+  TMDBVideos,
 } from './interfaces/tmdb';
+import { Videos } from '../entities/Videos';
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const DEFAULT_IMAGE_SIZE = 'w500';
@@ -255,6 +257,50 @@ class TMDB extends MediaClient {
       };
     } catch (error) {
       console.error('Error fetching show by id:', error);
+      throw error;
+    }
+  }
+
+  public async getMovieVideosById(id: number): Promise<Videos> {
+    try {
+      const response = await axios.get<TMDBVideos>(`${BASE_URL}/movie/${id}/videos`, {
+        headers: this.getHeaders(),
+      });
+
+      return {
+        id: response.data.id,
+        results: response.data.results.map((video) => ({
+          id: video.id,
+          key: video.key,
+          name: video.name,
+          site: video.site,
+          type: video.type,
+        })),
+      };
+    } catch (error) {
+      console.error('Error fetching movie videos by id', id);
+      throw error;
+    }
+  }
+
+  public async getShowVideosById(id: number): Promise<Videos> {
+    try {
+      const response = await axios.get<TMDBVideos>(`${BASE_URL}/tv/${id}/videos`, {
+        headers: this.getHeaders(),
+      });
+
+      return {
+        id: response.data.id,
+        results: response.data.results.map((video) => ({
+          id: video.id,
+          key: video.key,
+          name: video.name,
+          site: video.site,
+          type: video.type,
+        })),
+      };
+    } catch (error) {
+      console.error('Error fetching movie videos by id', id);
       throw error;
     }
   }

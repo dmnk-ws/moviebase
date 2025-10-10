@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography, Stack } from '@mui/material';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectShowById } from '../../store/slices/showSlice';
 import MediaBackdrop from './MediaBackdrop';
 import MediaPoster from './MediaPoster';
@@ -9,6 +9,9 @@ import MediaRating from './MediaRating';
 import MediaOverview from './MediaOverview';
 import MediaTitle from './MediaTitle';
 import MediaYear from './MediaYear';
+import Trailer from './Trailer';
+import { selectShowTrailer } from '../../store/selectors/videosSelector';
+import { fetchShowVideos } from '../../store/slices/videosSlice';
 
 interface ShowProps {
   id: number;
@@ -16,6 +19,13 @@ interface ShowProps {
 
 const Show = ({ id }: ShowProps) => {
   const show = useAppSelector((state) => selectShowById(state, id));
+  const dispatch = useAppDispatch();
+  const trailerLoading = useAppSelector((state) => state.videos.loading);
+  const trailer = useAppSelector((state) => selectShowTrailer(state, id));
+
+  useEffect(() => {
+    dispatch(fetchShowVideos(id));
+  }, [dispatch, id]);
 
   return (
     <Box position="relative" color="white" bgcolor="#000">
@@ -39,7 +49,7 @@ const Show = ({ id }: ShowProps) => {
           <MediaGenres genres={show.genres} />
           {(show.numberOfSeasons || show.numberOfEpisodes || show.voteAverage) && (
             <Stack spacing={2}>
-              <Stack direction="row" spacing={3} marginBottom={3}>
+              <Stack direction="row" spacing={3} marginBottom={3} alignItems="center">
                 {show.numberOfSeasons && (
                   <Typography variant="body1" fontWeight="bold">
                     {show.numberOfSeasons} Season
@@ -52,6 +62,7 @@ const Show = ({ id }: ShowProps) => {
                     {show.numberOfEpisodes !== 1 ? 's' : ''}
                   </Typography>
                 )}
+                <Trailer loading={trailerLoading} trailer={trailer} />
               </Stack>
               <MediaRating voteAverage={show.voteAverage} />
             </Stack>
