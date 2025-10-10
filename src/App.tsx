@@ -9,6 +9,8 @@ import {
   Feed,
   SearchFeed,
   NotFound,
+  TopRatedMovies,
+  TopRatedShows,
 } from './components';
 
 const App = () => {
@@ -18,8 +20,10 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Feed />} />
+          <Route path="/movies/top-rated" element={<TopRatedMovies />} />
           <Route path="/movies/genres" element={<GenreMovies />} />
           <Route path="/movies/:id" element={<MovieLoader />} />
+          <Route path="/shows/top-rated" element={<TopRatedShows />} />
           <Route path="/shows/genres" element={<GenreShows />} />
           <Route path="/shows/:id" element={<ShowLoader />} />
           <Route path="/search/:searchTerm" element={<SearchFeed />} />
