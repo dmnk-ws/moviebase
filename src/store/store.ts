@@ -4,6 +4,7 @@ import showSlice from './slices/showSlice';
 import genreSlice from './slices/genreSlice';
 import logger from 'redux-logger';
 import videosSlice from './slices/videosSlice';
+import searchSlice from './slices/searchSlice';
 
 const isDevelopment = import.meta.env.MODE === 'development';
 
@@ -13,6 +14,7 @@ export const store = configureStore({
     shows: showSlice,
     genres: genreSlice,
     videos: videosSlice,
+    search: searchSlice,
   },
   middleware: (getDefaultMiddleware) => {
     const middleware = getDefaultMiddleware();

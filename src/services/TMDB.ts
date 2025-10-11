@@ -1,8 +1,9 @@
 import axios from 'axios';
-import MediaClient, { QueryParams } from './MediaClient';
+import MediaClient, { QueryParams, PaginatedSearchResults } from './MediaClient';
 import { Movie } from '../entities/Movie';
 import { Show } from '../entities/Show';
 import { Genre } from '../entities/Genre';
+import { Keyword } from '../entities/Keyword';
 import { GenreType } from '../enums/GenreType';
 import {
   TMDBMovie,
@@ -13,6 +14,7 @@ import {
   PaginatedResponse,
   TMDBGenres,
   TMDBVideos,
+  TMDBKeyword,
 } from './interfaces/tmdb';
 import { Videos } from '../entities/Videos';
 
@@ -66,6 +68,10 @@ class TMDB extends MediaClient {
           description: movie.overview,
           overview: movie.overview,
           imagePath: await this.buildImageUrl(movie.poster_path),
+          backdropPath: await this.buildImageUrl(
+            movie.backdrop_path,
+            DEFAULT_BACKDROP_SIZE
+          ),
         }))
       );
     } catch (error) {
@@ -96,6 +102,10 @@ class TMDB extends MediaClient {
           description: show.overview,
           overview: show.overview,
           imagePath: await this.buildImageUrl(show.poster_path),
+          backdropPath: await this.buildImageUrl(
+            show.backdrop_path,
+            DEFAULT_BACKDROP_SIZE
+          ),
         }))
       );
     } catch (error) {
@@ -301,6 +311,130 @@ class TMDB extends MediaClient {
       };
     } catch (error) {
       console.error('Error fetching movie videos by id', id);
+      throw error;
+    }
+  }
+
+  public async searchKeyword(
+    params: QueryParams = {}
+  ): Promise<PaginatedSearchResults<Keyword>> {
+    const { query, page = 1 } = params;
+
+    if (!query) throw new Error('Search query is required');
+
+    try {
+      const response = await axios.get<PaginatedResponse<TMDBKeyword>>(
+        `${BASE_URL}/search/keyword`,
+        {
+          headers: this.getHeaders(),
+          params: {
+            query,
+            page,
+          },
+        }
+      );
+
+      const keywords: Keyword[] = response.data.results.map((keyword) => ({
+        id: keyword.id,
+        name: keyword.name,
+      }));
+
+      return {
+        results: keywords,
+        page: response.data.page,
+        totalPages: response.data.total_pages,
+        totalResults: response.data.total_results,
+      };
+    } catch (error) {
+      console.error('Error searching keywords:', error);
+      throw error;
+    }
+  }
+
+  public async searchMovieByKeyword(
+    params: QueryParams = {}
+  ): Promise<PaginatedSearchResults<Movie>> {
+    const { query, page = 1, language = 'en-US' } = params;
+
+    if (!query) throw new Error('Search query is required');
+
+    try {
+      const response = await axios.get<PaginatedResponse<TMDBMovie>>(
+        `${BASE_URL}/search/movie`,
+        {
+          headers: this.getHeaders(),
+          params: {
+            query,
+            language,
+            page,
+          },
+        }
+      );
+
+      const movies = await Promise.all(
+        response.data.results.map(async (movie) => ({
+          id: movie.id,
+          title: movie.title,
+          description: movie.overview,
+          overview: movie.overview,
+          imagePath: await this.buildImageUrl(movie.poster_path),
+          releaseDate: movie.release_date,
+          voteAverage: movie.vote_average,
+        }))
+      );
+
+      return {
+        results: movies,
+        page: response.data.page,
+        totalPages: response.data.total_pages,
+        totalResults: response.data.total_results,
+      };
+    } catch (error) {
+      console.error('Error searching movies by keyword:', error);
+      throw error;
+    }
+  }
+
+  public async searchShowByKeyword(
+    params: QueryParams = {}
+  ): Promise<PaginatedSearchResults<Show>> {
+    const { query, page = 1, language = 'en-US' } = params;
+
+    if (!query) throw new Error('Search query is required');
+
+    try {
+      const response = await axios.get<PaginatedResponse<TMDBShow>>(
+        `${BASE_URL}/search/tv`,
+        {
+          headers: this.getHeaders(),
+          params: {
+            query,
+            language,
+            page,
+          },
+        }
+      );
+
+      const shows = await Promise.all(
+        response.data.results.map(async (show) => ({
+          id: show.id,
+          name: show.name,
+          description: show.overview,
+          overview: show.overview,
+          imagePath: await this.buildImageUrl(show.poster_path),
+          firstAirDate: show.first_air_date,
+          voteAverage: show.vote_average,
+        }))
+      );
+
+      return {
+        results: shows,
+        page: response.data.page,
+        totalPages: response.data.total_pages,
+        totalResults: response.data.total_results,
+      };
+    } catch (error) {
+      console.error('Error searching shows by keyword:', error);
       throw error;
     }
   }

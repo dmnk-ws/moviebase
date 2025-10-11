@@ -1,8 +1,9 @@
-import { TrendingMovies, TrendingShows, Layout } from './index';
+import { TrendingMovies, TrendingShows, Layout, SearchHero } from './index';
 
 const Feed = () => {
   return (
     <Layout>
+      <SearchHero />
       <TrendingMovies />
       <TrendingShows />
     </Layout>

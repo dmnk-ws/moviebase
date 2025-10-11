@@ -2,12 +2,21 @@ import { Movie } from '../entities/Movie';
 import { Show } from '../entities/Show';
 import { Genre } from '../entities/Genre';
 import { Videos } from '../entities/Videos';
+import { Keyword } from '../entities/Keyword';
 
 export interface QueryParams {
   page?: number;
   language?: string;
   timeWindow?: 'day' | 'week';
   genre?: number;
+  query?: string;
+}
+
+export interface PaginatedSearchResults<T> {
+  results: T[];
+  page: number;
+  totalPages: number;
+  totalResults: number;
 }
 
 /**
@@ -84,4 +93,31 @@ export default abstract class MediaClient {
    * @returns Response with Videos results
    */
   public abstract getShowVideosById(id: number): Promise<Videos>;
+
+  /**
+   * Search for keywords by query string
+   * @param params - Query parameters including search query
+   * @returns Response with paginated Keyword results
+   */
+  public abstract searchKeyword(
+    params: QueryParams
+  ): Promise<PaginatedSearchResults<Keyword>>;
+
+  /**
+   * Search for movies by query string
+   * @param params - Query parameters including search query
+   * @returns Response with paginated Movie results
+   */
+  public abstract searchMovieByKeyword(
+    params: QueryParams
+  ): Promise<PaginatedSearchResults<Movie>>;
+
+  /**
+   * Search for TV shows by query string
+   * @param params - Query parameters including search query
+   * @returns Response with paginated Show results
+   */
+  public abstract searchShowByKeyword(
+    params: QueryParams
+  ): Promise<PaginatedSearchResults<Show>>;
 }
