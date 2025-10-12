@@ -3,9 +3,8 @@ import { Genre } from './Genre';
 export interface Movie {
   id: number;
   title: string;
-  description: string;
-  overview: string;
   imagePath: string | null;
+  overview?: string;
   backdropPath?: string | null;
   releaseDate?: string;
   genres?: Genre[];

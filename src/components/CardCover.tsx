@@ -23,11 +23,16 @@ const CardCover = ({ to, alt, imagePath }: CardCoverProps) => {
         width: CARD_DIMENSIONS.width,
         height: CARD_DIMENSIONS.height,
         boxShadow: 'none',
+        backgroundColor: '#000',
         borderRadius: 1,
         overflow: 'hidden',
         flexShrink: 0,
         position: 'relative',
         zIndex: 2,
+        transition: 'all 0.2s ease-in-out',
+        '&:hover': {
+          boxShadow: '0 4px 16px rgba(255, 159, 128, 0.3)',
+        },
       }}
     >
       <Link

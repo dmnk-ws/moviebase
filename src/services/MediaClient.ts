@@ -120,4 +120,18 @@ export default abstract class MediaClient {
   public abstract searchShowByKeyword(
     params: QueryParams
   ): Promise<PaginatedSearchResults<Show>>;
+
+  /**
+   * Fetch top-rated movies
+   * @param params - Query parameters (page, language, timeWindow)
+   * @returns Response with Movie[]
+   */
+  public abstract getTopRatedMovies(params?: QueryParams): Promise<Movie[]>;
+
+  /**
+   * Fetch top-rated TV shows
+   * @param params - Query parameters (page, language, timeWindow)
+   * @returns Response with Show[]
+   */
+  public abstract getTopRatedShows(params?: QueryParams): Promise<Show[]>;
 }

@@ -28,6 +28,13 @@ export const fetchMovieById = createAsyncThunk(
   }
 );
 
+export const fetchTopRatedMovies = createAsyncThunk(
+  'movies/fetchTopRated',
+  async (params?: QueryParams) => {
+    return MediaService.getTopRatedMovies(params);
+  }
+);
+
 interface MovieState {
   loading: boolean;
   moviesByGenre: Record<number, number[]>;
@@ -83,6 +90,19 @@ const movieSlice = createSlice({
         const movie = action.payload;
 
         if (movie) movieAdapter.upsertOne(state, movie);
+      },
+      settled(state) {
+        state.loading = false;
+      },
+    });
+    builder.addAsyncThunk(fetchTopRatedMovies, {
+      pending(state) {
+        state.loading = true;
+      },
+      fulfilled(state, action) {
+        const movies = action.payload;
+
+        if (movies) movieAdapter.upsertMany(state, movies);
       },
       settled(state) {
         state.loading = false;

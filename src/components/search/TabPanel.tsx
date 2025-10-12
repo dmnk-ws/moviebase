@@ -1,13 +1,14 @@
 import React, { ReactNode } from 'react';
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
+import LoadMore from '../LoadMore';
 
 interface TabPanelProps {
   children?: ReactNode;
   index: number;
   value: number;
-  onLoadMore?: () => void;
+  onLoadMore: () => void;
+  loading: boolean;
   hasMore?: boolean;
-  loading?: boolean;
 }
 
 const TabPanel = ({
@@ -19,36 +20,18 @@ const TabPanel = ({
   loading,
 }: TabPanelProps) => {
   return (
-    <div role="tabpanel" hidden={value !== index}>
+    <Box component="div" role="tabpanel" hidden={value !== index}>
       {value === index && (
-        <Box sx={{ py: 3 }}>
+        <Box paddingTop={3}>
           {children}
           {hasMore && (
-            <Box display="flex" justifyContent="center" mt={4}>
-              <Button
-                variant="outlined"
-                onClick={onLoadMore}
-                disabled={loading}
-                sx={{
-                  color: 'white',
-                  borderColor: 'rgba(255, 159, 128, 0.5)',
-                  '&:hover': {
-                    borderColor: 'rgba(255, 159, 128, 1)',
-                    backgroundColor: 'rgba(255, 159, 128, 0.1)',
-                  },
-                  '&:disabled': {
-                    borderColor: 'rgba(255, 255, 255, 0.3)',
-                    color: 'rgba(255, 255, 255, 0.5)',
-                  },
-                }}
-              >
-                {loading ? 'Loading...' : 'Show More'}
-              </Button>
+            <Box display="flex" justifyContent="center" marginTop={4}>
+              <LoadMore onClick={onLoadMore} loading={loading} />
             </Box>
           )}
         </Box>
       )}
-    </div>
+    </Box>
   );
 };
 

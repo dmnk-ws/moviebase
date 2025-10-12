@@ -25,6 +25,6 @@ export { default as Header } from './Header';
 export { default as MediaCard } from './MediaCard';
 export { default as CardCover } from './CardCover';
 export { default as Loading } from './Loading';
-export { default as TopRatedMovies } from './TopRatedMovies';
-export { default as TopRatedShows } from './TopRatedShows';
 export { default as Footer } from './Footer';
+export { default as TopRatedMovies } from './top-rated/TopRatedMovies';
+export { default as TopRatedShows } from './top-rated/TopRatedShows';

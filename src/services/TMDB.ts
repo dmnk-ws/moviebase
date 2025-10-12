@@ -65,7 +65,6 @@ class TMDB extends MediaClient {
         response.data.results.map(async (movie) => ({
           id: movie.id,
           title: movie.title,
-          description: movie.overview,
           overview: movie.overview,
           imagePath: await this.buildImageUrl(movie.poster_path),
           backdropPath: await this.buildImageUrl(
@@ -99,7 +98,6 @@ class TMDB extends MediaClient {
         response.data.results.map(async (show) => ({
           id: show.id,
           name: show.name,
-          description: show.overview,
           overview: show.overview,
           imagePath: await this.buildImageUrl(show.poster_path),
           backdropPath: await this.buildImageUrl(
@@ -166,7 +164,6 @@ class TMDB extends MediaClient {
         response.data.results.map(async (movie) => ({
           id: movie.id,
           title: movie.title,
-          description: movie.overview,
           overview: movie.overview,
           imagePath: await this.buildImageUrl(movie.poster_path),
         }))
@@ -197,7 +194,6 @@ class TMDB extends MediaClient {
         response.data.results.map(async (show) => ({
           id: show.id,
           name: show.name,
-          description: show.overview,
           overview: show.overview,
           imagePath: await this.buildImageUrl(show.poster_path),
         }))
@@ -219,7 +215,6 @@ class TMDB extends MediaClient {
       return {
         id: movie.id,
         title: movie.title,
-        description: movie.overview,
         overview: movie.overview,
         imagePath: await this.buildImageUrl(movie.poster_path),
         backdropPath: await this.buildImageUrl(
@@ -248,7 +243,6 @@ class TMDB extends MediaClient {
       return {
         id: show.id,
         name: show.name,
-        description: show.overview,
         overview: show.overview,
         imagePath: await this.buildImageUrl(show.poster_path),
         backdropPath: await this.buildImageUrl(
@@ -435,6 +429,67 @@ class TMDB extends MediaClient {
       };
     } catch (error) {
       console.error('Error searching shows by keyword:', error);
+      throw error;
+    }
+  }
+
+  public async getTopRatedMovies(params: QueryParams = {}): Promise<Movie[]> {
+    const { page, language } = params;
+
+    try {
+      const response = await axios.get<PaginatedResponse<TMDBMovie>>(
+        `${BASE_URL}/movie/top_rated`,
+        {
+          headers: this.getHeaders(),
+          params: {
+            page,
+            language,
+          },
+        }
+      );
+
+      return Promise.all(
+        response.data.results.map(async (movie) => ({
+          id: movie.id,
+          title: movie.title,
+          imagePath: await this.buildImageUrl(movie.poster_path),
+          date: movie.release_date,
+          voteAverage: movie.vote_average,
+          releaseDate: movie.release_date,
+        }))
+      );
+    } catch (error) {
+      console.error('Error fetching top-rated movies', error);
+      throw error;
+    }
+  }
+
+  public async getTopRatedShows(params: QueryParams = {}): Promise<Show[]> {
+    const { page, language } = params;
+
+    try {
+      const response = await axios.get<PaginatedResponse<TMDBShow>>(
+        `${BASE_URL}/tv/top_rated`,
+        {
+          headers: this.getHeaders(),
+          params: {
+            page,
+            language,
+          },
+        }
+      );
+
+      return Promise.all(
+        response.data.results.map(async (show) => ({
+          id: show.id,
+          name: show.name,
+          imagePath: await this.buildImageUrl(show.poster_path),
+          firstAirDate: show.first_air_date,
+          voteAverage: show.vote_average,
+        }))
+      );
+    } catch (error) {
+      console.error('Error fetching top-rated shows', error);
       throw error;
     }
   }
