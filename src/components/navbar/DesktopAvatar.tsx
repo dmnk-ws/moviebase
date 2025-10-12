@@ -9,19 +9,41 @@ import NavPopover from './NavPopover';
 const DesktopAvatar = () => {
   const [anchor, setAnchor] = useState<null | HTMLElement>(null);
   const open = Boolean(anchor);
+  const [closeTimer, setCloseTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleEnter = (event: MouseEvent<HTMLElement>) => {
+  const handleMouseEnter = (event: MouseEvent<HTMLElement>) => {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      setCloseTimer(null);
+    }
+
     setAnchor(event.currentTarget);
   };
 
-  const handleLeave = () => {
+  const handleMouseLeave = () => {
+    const timer = setTimeout(() => {
+      setAnchor(null);
+    }, 100);
+
+    setCloseTimer(timer);
+  };
+
+  const handlePopoverEnter = () => {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      setCloseTimer(null);
+    }
+  };
+
+  const handlePopoverLeave = () => {
     setAnchor(null);
   };
 
   return (
     <>
       <Box
-        onMouseEnter={handleEnter}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         display={{ xs: 'none', md: 'flex' }}
         alignItems="center"
         sx={{
@@ -44,14 +66,19 @@ const DesktopAvatar = () => {
           }}
         />
       </Box>
-      <NavPopover open={open} anchor={anchor} onLeave={handleLeave}>
+      <NavPopover
+        open={open}
+        anchor={anchor}
+        onEnter={handlePopoverEnter}
+        onLeave={handlePopoverLeave}
+      >
         <MenuList>
           {profileList.map((item) => (
             <PopoverEntry
               key={item.name}
               name={item.name}
               icon={item.icon}
-              onClose={handleLeave}
+              onClose={handleMouseLeave}
             />
           ))}
         </MenuList>

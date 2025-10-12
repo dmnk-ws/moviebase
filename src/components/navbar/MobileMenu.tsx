@@ -34,6 +34,7 @@ const MobileMenu = () => {
   const handleCloseSubMenu = () => {
     setAnchorElSub(null);
     setCurrentSubMenu(null);
+    setAnchorElNav(null);
   };
 
   return (
@@ -75,7 +76,7 @@ const MobileMenu = () => {
           </MenuItem>
         ))}
       </NavMenu>
-      <NavMenu anchor={anchorElSub} onClose={handleCloseSubMenu}>
+      <NavMenu anchor={anchorElSub} onClose={handleCloseSubMenu} isSubmenu>
         {currentSubMenu?.entries?.map((entry) => (
           <MenuItem
             key={entry.name}

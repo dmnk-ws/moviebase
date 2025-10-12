@@ -4,11 +4,12 @@ import { Popover } from '@mui/material';
 interface NavPopoverProps {
   open: boolean;
   anchor: HTMLElement | null;
+  onEnter: () => void;
   onLeave: () => void;
   children: ReactNode;
 }
 
-const NavPopover = ({ open, anchor, onLeave, children }: NavPopoverProps) => {
+const NavPopover = ({ open, anchor, onEnter, onLeave, children }: NavPopoverProps) => {
   return (
     <Popover
       open={open}
@@ -24,6 +25,7 @@ const NavPopover = ({ open, anchor, onLeave, children }: NavPopoverProps) => {
       }}
       slotProps={{
         paper: {
+          onMouseEnter: onEnter,
           onMouseLeave: onLeave,
           sx: {
             background: 'black',

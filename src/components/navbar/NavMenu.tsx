@@ -5,19 +5,26 @@ interface NavMenuProps {
   anchor: HTMLElement | null;
   onClose: () => void;
   children: ReactNode;
+  isSubmenu?: boolean;
 }
 
-const NavMenu = ({ anchor, onClose, children }: NavMenuProps) => {
+const NavMenu = ({ anchor, onClose, children, isSubmenu = false }: NavMenuProps) => {
   const open = Boolean(anchor);
 
   return (
     <Menu
-      id="menu-appbar"
       anchorEl={anchor}
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'left',
-      }}
+      anchorOrigin={
+        isSubmenu
+          ? {
+              vertical: 'top',
+              horizontal: 'right',
+            }
+          : {
+              vertical: 'bottom',
+              horizontal: 'left',
+            }
+      }
       keepMounted
       transformOrigin={{
         vertical: 'top',
@@ -32,7 +39,7 @@ const NavMenu = ({ anchor, onClose, children }: NavMenuProps) => {
         paper: {
           sx: {
             background: 'black',
-            border: '1px solid white',
+            border: !open ? 'none' : '1px solid white',
           },
         },
       }}

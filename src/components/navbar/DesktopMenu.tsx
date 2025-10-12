@@ -15,13 +15,34 @@ import NavPopover from './NavPopover';
 const DesktopMenu = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [closeTimer, setCloseTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
 
   const handleMouseEnter = (event: MouseEvent<HTMLElement>, menuName: string) => {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      setCloseTimer(null);
+    }
+
     setAnchorEl(event.currentTarget);
     setOpenMenu(menuName);
   };
 
   const handleMouseLeave = () => {
+    const timer = setTimeout(() => {
+      setAnchorEl(null);
+      setOpenMenu(null);
+    }, 100);
+    setCloseTimer(timer);
+  };
+
+  const handlePopoverEnter = () => {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      setCloseTimer(null);
+    }
+  };
+
+  const handlePopoverLeave = () => {
     setAnchorEl(null);
     setOpenMenu(null);
   };
@@ -39,6 +60,7 @@ const DesktopMenu = () => {
             <>
               <Box
                 onMouseEnter={(e) => handleMouseEnter(e, nav.name)}
+                onMouseLeave={handleMouseLeave}
                 color="white"
                 marginLeft="20px"
                 display="flex"
@@ -62,7 +84,8 @@ const DesktopMenu = () => {
               <NavPopover
                 open={openMenu === nav.name}
                 anchor={anchorEl}
-                onLeave={handleMouseLeave}
+                onEnter={handlePopoverEnter}
+                onLeave={handlePopoverLeave}
               >
                 <MenuList>
                   {nav.entries.map((entry) => (
