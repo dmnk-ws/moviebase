@@ -99,7 +99,7 @@ const SearchEntry = ({
             </Typography>
             {voteAverage !== undefined && voteAverage > 0 && (
               <Chip
-                label={`★ ${voteAverage.toFixed(1)}`}
+                label={`\u2605 ${voteAverage.toFixed(1)}`}
                 size="small"
                 sx={{
                   mt: 1,

@@ -5,10 +5,10 @@ import { CardCover } from './index';
 
 const MediaCard = ({ to, alt, imagePath }: CardCoverProps) => (
   <Box
+    display="flex"
+    position="relative"
+    flexShrink={0}
     sx={{
-      position: 'relative',
-      display: 'flex',
-      flexShrink: 0,
       cursor: 'pointer',
       transition: 'transform 0.3s ease',
       '&:hover': {

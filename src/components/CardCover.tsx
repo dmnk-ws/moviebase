@@ -23,7 +23,7 @@ const CardCover = ({ to, alt, imagePath }: CardCoverProps) => {
         width: CARD_DIMENSIONS.width,
         height: CARD_DIMENSIONS.height,
         boxShadow: 'none',
-        backgroundColor: '#000',
+        backgroundColor: 'black',
         borderRadius: 1,
         overflow: 'hidden',
         flexShrink: 0,

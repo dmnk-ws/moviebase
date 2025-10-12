@@ -36,9 +36,11 @@ const Carousel = ({ children }: CarouselProps) => {
       width="100%"
       marginBottom={3}
       paddingX={2}
+      boxSizing="border-box"
       sx={{
-        '&:hover .carousel-arrow': { opacity: 1 },
-        boxSizing: 'border-box',
+        '&:hover .carousel-arrow': {
+          opacity: 1,
+        },
       }}
     >
       {showLeftArrow && (

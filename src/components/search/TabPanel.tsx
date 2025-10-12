@@ -20,7 +20,7 @@ const TabPanel = ({
   loading,
 }: TabPanelProps) => {
   return (
-    <Box component="div" role="tabpanel" hidden={value !== index}>
+    <Box role="tabpanel" hidden={value !== index}>
       {value === index && (
         <Box paddingTop={3}>
           {children}

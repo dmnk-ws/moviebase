@@ -8,15 +8,13 @@ const NotFound = () => {
 
   return (
     <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '70vh',
-        color: 'white',
-        padding: 4,
-      }}
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      minHeight="70vh"
+      color="white"
+      p={2}
     >
       <HelpIcon sx={{ fontSize: 100, marginBottom: 2, color: 'white' }} />
       <Typography variant="h3" component="h1" fontWeight="bold" marginBottom={2}>
