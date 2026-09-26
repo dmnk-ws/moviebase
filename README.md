@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# Moviebase
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React app for browsing movies and TV shows, powered by [The Movie Database (TMDB)](https://www.themoviedb.org/) API.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Trending movies and shows feed
+- Top-rated movies and shows
+- Browse movies and shows by genre
+- Detail pages with trailers
+- Search across keywords, movies and shows
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [React](https://react.dev/) 19 + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vite.dev/)
+- [Redux Toolkit](https://redux-toolkit.js.org/) and [React Redux](https://react-redux.js.org/)
+- [React Router](https://reactrouter.com/)
+- [MUI](https://mui.com/) with [Emotion](https://emotion.sh/)
+- [Axios](https://axios-http.com/)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js and npm
+- A TMDB API read access token, available in your [TMDB account settings](https://www.themoviedb.org/settings/api)
 
-### `npm run build`
+### Setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Install dependencies:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```sh
+   npm install
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Create a `.env` file in the project root with your token:
 
-### `npm run eject`
+   ```sh
+   VITE_MOVIE_DB_ACCESS_TOKEN=your_tmdb_read_access_token
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. Start the development server:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```sh
+   npm run dev
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+   The app opens at [http://localhost:3000](http://localhost:3000).
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Scripts
 
-## Learn More
+| Command            | Description                                        |
+| ------------------ | -------------------------------------------------- |
+| `npm run dev`      | Start the Vite development server on port 3000     |
+| `npm run build`    | Type-check and build for production into `build/`  |
+| `npm run preview`  | Serve the production build locally                 |
+| `npm run lint`     | Run ESLint                                         |
+| `npm run lint:fix` | Run ESLint and fix issues automatically            |
+| `npm run format`   | Format the source files with Prettier              |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Project Structure
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+src/
+├── components/   UI components (feed, carousel, details, genres, navbar, search, ...)
+├── entities/     Domain models (Movie, Show, Genre, Keyword, Video)
+├── enums/        Shared enums
+├── hooks/        Custom React hooks
+├── services/     Media API clients (TMDB)
+├── store/        Redux store, slices and selectors
+└── utils/        Constants and helpers
+```
 
-### Code Splitting
+## Attribution
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This product uses the TMDB API but is not endorsed or certified by TMDB.
